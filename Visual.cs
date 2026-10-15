@@ -28,7 +28,12 @@ namespace SimpleJobTracker
         );
 
         JavaScraper javaScraper = new JavaScraper();
-        //ProfileManager ProfileManager = new ProfileManager();
+        ProfileManager profileManager = new ProfileManager();
+        List<Control> profileControls = new List<Control>();
+
+        bool canScroll = false;
+        int scrollLocation = 0;
+        float scrollSpeed = 0.2f;
 
         public Visual()
         {
@@ -38,60 +43,80 @@ namespace SimpleJobTracker
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
             CompanyDetails.Hide();
-            //ProfileManager.LoadJobProfiles();
+            TestProfile.Hide();
+            ProfileList.Controls.Remove(TestProfile);
 
-            /*List<JobProfile> jobProfiles = ProfileManager.GetjobProfiles();
+            List<JobProfile> jobProfiles = profileManager.GetjobProfiles();
 
             for(int i = 0; i < jobProfiles.Count; i++)
             {
-                Control con = new System.Windows.Forms.GroupBox();
+                AddProfileControler(jobProfiles[i]);
+            }
 
-                con.Controls.Add(this.button2);
-                con.Controls.Add(this.label3);
-                con.Controls.Add(this.button1);
-                con.Controls.Add(this.CompanyLink);
-                con.Dock = System.Windows.Forms.DockStyle.Top;
-                con.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-                con.Location = new System.Drawing.Point(3, 3);
-                con.Name = "Profile: " + jobProfiles[i].Id;
-                con.Padding = new System.Windows.Forms.Padding(5, 10, 5, 3);
-                con.Size = new System.Drawing.Size(300, 100);
-                con.TabIndex = 2;
-                con.TabStop = false;
-                con.Text = jobProfiles[i].Name;
+            //Set Scroll settings
+            ProfileList.AutoScrollPosition = new Point(0, 0);
+            ProfileList.VerticalScroll.Maximum = (ProfileList.Controls.Count * (ProfileList.Controls[0].Height + ProfileList.Controls[0].Margin.Top + ProfileList.Controls[0].Margin.Bottom)) - ProfileList.Height;
+            this.MouseWheel += ProfileListScroll;
+        }
 
-                ProfileList.Controls.Add(con);
-            }*/
+        //Scroll through job profiles
+        private void ProfileListScroll(object sender, MouseEventArgs e)
+        {
+            if (canScroll)
+            {
+                var temp = scrollLocation - (int)(e.Delta * scrollSpeed);
+                if(temp < 0)
+                {
+                    scrollLocation = 0;
+                    ProfileList.AutoScrollPosition = new Point(0, scrollLocation);
+                }
+                else if (temp > ProfileList.VerticalScroll.Maximum)
+                {
+                    scrollLocation = ProfileList.VerticalScroll.Maximum;
+                    ProfileList.AutoScrollPosition = new Point(0, scrollLocation);
+                }
+                else
+                {
+                    scrollLocation = temp;
+                    ProfileList.VerticalScroll.Value = scrollLocation;
+                }
+            }
             
         }
 
         private void Search_Click(object sender, EventArgs e)
         {
-            searchWeb();
+            var clickedButton = sender as Control;
+            var companyHeader = clickedButton.Parent as GroupBox;
+            searchWeb(companyHeader);
         }
 
-        private async Task<bool> searchWeb()
+        private async Task<bool> searchWeb(GroupBox company)
         {
             Stopwatch sw = Stopwatch.StartNew(); //stopwatch for speed testing
-            label3.Text = "";
+            company.Controls[1].Text = "";
 
             try
             {
+                JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(company)];
+
                 //Search the web page and count every instance of the tags from the tag string
-                var tagString = CompanyTags.Text;
+                var tagString = profile.Tags;
                 string[] companyTags = tagString.Split(' ');
-                int amount = await javaScraper.CheckWeb(CompanyLink.Text, companyTags);
-                label3.Text = amount.ToString();
+                int amount = await javaScraper.CheckWeb(profile.Link, companyTags);
+                company.Controls[1].Text = amount.ToString();
             }
             catch (Exception ex)
             {
-                label3.Text = ex.Message;
+                ResultLabel.Text = ex.Message;
             }
             
             //Turn elapsed time into seconds
             sw.Stop();
             float time = sw.ElapsedMilliseconds;
-            int roundedTime = (int)(time);
+            int roundedTime = (int)(time / 10f);
+            float timeInSeconds = roundedTime / 100f;
+            Console.WriteLine("Succesfully gotten job page info, time elapsed: " + timeInSeconds);
             
             return true;
         }
@@ -104,9 +129,87 @@ namespace SimpleJobTracker
             GroupBox companyHeader = settingButton.Parent as GroupBox;
             if (companyHeader != null)
             {
-                CompanyDetails.Text = companyHeader.Text;
+                JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(companyHeader)];
+                CompanyDetails.Text = profile.Name;
+                CompanyTags.Text = profile.Tags;
+                Console.WriteLine(companyHeader.TabIndex);
             }
 
+        }
+
+        private void AddProfileControler(JobProfile profile)
+        {
+            var con = new System.Windows.Forms.GroupBox();
+            var settingButton = new System.Windows.Forms.Button();
+            var resultLabel = new System.Windows.Forms.Label();
+            var searchButton = new System.Windows.Forms.Button();
+            var companyLink = new System.Windows.Forms.TextBox();
+
+            // CREATING BUTTON
+            settingButton.BackColor = SettingButton.BackColor;
+            settingButton.ForeColor = SettingButton.ForeColor;
+            settingButton.Location = SettingButton.Location;
+            settingButton.Name = "SettingButton " + profile.Id;
+            settingButton.Size = SettingButton.Size;
+            settingButton.TabIndex = SettingButton.TabIndex;
+            settingButton.Text = ". . .";
+            settingButton.UseVisualStyleBackColor = SettingButton.UseVisualStyleBackColor;
+            settingButton.Click += new System.EventHandler(this.ProfileSetting_Click);
+
+            // CREATING LABEL
+            resultLabel.Location = ResultLabel.Location;
+            resultLabel.Name = "ResultLabel " + profile.Id;
+            resultLabel.Size = SettingButton.Size;
+            resultLabel.TabIndex = SettingButton.TabIndex;
+            resultLabel.TextAlign = SettingButton.TextAlign;
+
+            // CREATING SETTING BUTTON
+            searchButton.BackColor = SearchButton.BackColor;
+            searchButton.ForeColor = SearchButton.ForeColor;
+            searchButton.Location = SearchButton.Location;
+            searchButton.Name = "SearchButton " + profile.Id;
+            searchButton.Size = SearchButton.Size;
+            searchButton.TabIndex = SearchButton.TabIndex;
+            searchButton.Text = "Search";
+            searchButton.UseVisualStyleBackColor = SearchButton.UseVisualStyleBackColor;
+            searchButton.Click += new System.EventHandler(this.Search_Click);
+
+            // CREATING COMPANY LINK
+            companyLink.BackColor = CompanyLink.BackColor;
+            companyLink.Dock = CompanyLink.Dock;
+            companyLink.ForeColor = CompanyLink.ForeColor;
+            companyLink.Location = CompanyLink.Location;
+            companyLink.Name = "CompanyLink " + profile.Id;
+            companyLink.Size = CompanyLink.Size;
+            companyLink.TabIndex = CompanyLink.TabIndex;
+            companyLink.Text = profile.Link;
+
+            // CREATING PROFILE GROUPBOX
+            con.Controls.Add(settingButton);
+            con.Controls.Add(resultLabel);
+            con.Controls.Add(searchButton);
+            con.Controls.Add(companyLink);
+            con.Dock = TestProfile.Dock;
+            con.ForeColor = TestProfile.ForeColor;
+            con.Location = TestProfile.Location;
+            con.Name = "Profile: " + profile.Id;
+            con.Padding = TestProfile.Padding;
+            con.Size = TestProfile.Size;
+            con.TabIndex = TestProfile.TabIndex;
+            con.TabStop = false;
+            con.Text = profile.Name;
+
+            ProfileList.Controls.Add(con);
+        }
+
+        private void ProfileList_MouseEnter(object sender, EventArgs e)
+        {
+            canScroll = true;
+        }
+
+        private void ProfileList_MouseLeave(object sender, EventArgs e)
+        {
+            canScroll = true;
         }
     }
 }

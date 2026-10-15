@@ -26,8 +26,12 @@ namespace SimpleJobTracker.Services
             LoadJobProfiles();
         }
 
-        //Get a list with all the job profiles
-        public List<JobProfile> GetjobProfiles() { return jobs; }
+        //Get a list with all the job profiles, loads from save file if jobs are empty
+        public List<JobProfile> GetjobProfiles() 
+        {
+            if (jobs.Count == 0) LoadJobProfiles();
+            return jobs;
+        }
 
         //Serializes all job profiles to JSON and stores into the save file
         public void SaveJobProfiles()

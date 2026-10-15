@@ -37,9 +37,9 @@
             this.CompanyTags = new System.Windows.Forms.TextBox();
             this.ProfileList = new System.Windows.Forms.FlowLayoutPanel();
             this.TestProfile = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SettingButton = new System.Windows.Forms.Button();
+            this.ResultLabel = new System.Windows.Forms.Label();
+            this.SearchButton = new System.Windows.Forms.Button();
             this.CompanyLink = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
@@ -146,12 +146,14 @@
             this.ProfileList.Size = new System.Drawing.Size(310, 392);
             this.ProfileList.TabIndex = 3;
             this.ProfileList.WrapContents = false;
+            this.ProfileList.MouseEnter += new System.EventHandler(this.ProfileList_MouseEnter);
+            this.ProfileList.MouseLeave += new System.EventHandler(this.ProfileList_MouseLeave);
             // 
             // TestProfile
             // 
-            this.TestProfile.Controls.Add(this.button2);
-            this.TestProfile.Controls.Add(this.label3);
-            this.TestProfile.Controls.Add(this.button1);
+            this.TestProfile.Controls.Add(this.SettingButton);
+            this.TestProfile.Controls.Add(this.ResultLabel);
+            this.TestProfile.Controls.Add(this.SearchButton);
             this.TestProfile.Controls.Add(this.CompanyLink);
             this.TestProfile.Dock = System.Windows.Forms.DockStyle.Right;
             this.TestProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -163,37 +165,37 @@
             this.TestProfile.TabStop = false;
             this.TestProfile.Text = "Test Company";
             // 
-            // button2
+            // SettingButton
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button2.Location = new System.Drawing.Point(220, 64);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 30);
-            this.button2.TabIndex = 3;
-            this.button2.Text = ". . .";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.ProfileSetting_Click);
+            this.SettingButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.SettingButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.SettingButton.Location = new System.Drawing.Point(242, 64);
+            this.SettingButton.Name = "SettingButton";
+            this.SettingButton.Size = new System.Drawing.Size(50, 30);
+            this.SettingButton.TabIndex = 3;
+            this.SettingButton.Text = ". . .";
+            this.SettingButton.UseVisualStyleBackColor = false;
+            this.SettingButton.Click += new System.EventHandler(this.ProfileSetting_Click);
             // 
-            // label3
+            // ResultLabel
             // 
-            this.label3.Location = new System.Drawing.Point(139, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 30);
-            this.label3.TabIndex = 2;
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ResultLabel.Location = new System.Drawing.Point(114, 64);
+            this.ResultLabel.Name = "ResultLabel";
+            this.ResultLabel.Size = new System.Drawing.Size(122, 30);
+            this.ResultLabel.TabIndex = 2;
+            this.ResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
+            // SearchButton
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button1.Location = new System.Drawing.Point(8, 64);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 30);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Search_Click);
+            this.SearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.SearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.SearchButton.Location = new System.Drawing.Point(8, 64);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(100, 30);
+            this.SearchButton.TabIndex = 1;
+            this.SearchButton.Text = "Search";
+            this.SearchButton.UseVisualStyleBackColor = false;
+            this.SearchButton.Click += new System.EventHandler(this.Search_Click);
             // 
             // CompanyLink
             // 
@@ -276,9 +278,9 @@
         private System.Windows.Forms.TextBox CompanyTags;
         private System.Windows.Forms.FlowLayoutPanel ProfileList;
         private System.Windows.Forms.GroupBox TestProfile;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SettingButton;
+        private System.Windows.Forms.Label ResultLabel;
+        private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.TextBox CompanyLink;
     }
 }

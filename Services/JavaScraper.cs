@@ -83,8 +83,9 @@ namespace SimpleJobTracker.Services
                 }
             }
             catch (Exception ex) 
-            { 
-                Console.WriteLine("ERROR: " + ex.Message); 
+            {
+                Console.WriteLine("ERROR: " + ex.Message);
+                throw new Exception(ex.Message);
             }
 
             return amount;
