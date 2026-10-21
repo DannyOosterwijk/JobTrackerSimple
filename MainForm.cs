@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
@@ -17,6 +18,7 @@ namespace SimpleJobTracker
 {
     public partial class MainForm : Form
     {
+        //External DLL's
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,     // x-coordinate of upper-left corner
@@ -27,14 +29,18 @@ namespace SimpleJobTracker
             int nHeightEllipse // height of ellipse
         );
 
-        JavaScraper javaScraper = new JavaScraper();
-        ProfileManager profileManager = new ProfileManager();
-        List<Control> profileControls = new List<Control>();
+        //Web scrapping
+        private JavaScraper javaScraper = new JavaScraper();
+        private ProfileManager profileManager = new ProfileManager();
+        private List<Control> profileControls = new List<Control>();
 
-        int scrollLocation = 0;
-        float scrollSpeed = 0.2f;
-
+        //Navigating & moving
+        private int scrollLocation = 0;
+        private float scrollSpeed = 0.2f;
         private Point startPoint = Point.Empty;
+
+        //Notification tray
+        private NotifyIcon notifyIcon;
 
         public MainForm()
         {
@@ -58,6 +64,24 @@ namespace SimpleJobTracker
             ProfileList.AutoScrollPosition = new Point(0, 0);
             ProfileList.VerticalScroll.Maximum = (ProfileList.Controls.Count * (ProfileList.Controls[0].Height + ProfileList.Controls[0].Margin.Top + ProfileList.Controls[0].Margin.Bottom)) - ProfileList.Height;
             this.MouseWheel += ProfileListScroll;
+
+            InitializeIconContext();
+        }
+
+        //Initialize the icon in the notificiation tray
+        private void InitializeIconContext()
+        {
+            components = new System.ComponentModel.Container();
+            notifyIcon = new NotifyIcon(components)
+            {
+                ContextMenuStrip = new ContextMenuStrip(),
+                Icon = new Icon(Path.Combine(Directory.GetCurrentDirectory(), "IconJTS.ico")),
+                Text = "Simple Job Tracker",
+                Visible = true,
+                BalloonTipTitle = "Simple Job Tracker",
+                BalloonTipText = "Finished checking job pages"
+            };
+            notifyIcon.DoubleClick += notifyIcon_DoubleClick;
         }
 
         //Try to search the web and retrieve the amount of instances of the profiles tags
@@ -219,9 +243,22 @@ namespace SimpleJobTracker
         //Exit application
         private void Minimize_Clicked(object sender, EventArgs e)
         {
-            if (FormWindowState.Normal == this.WindowState)
+            if (this.WindowState != FormWindowState.Minimized)
             {
-                //TODO: make application window minimize
+                this.WindowState = FormWindowState.Minimized;
+                notifyIcon.Visible = true;
+                this.ShowInTaskbar = false;
+            }
+        }
+
+        //Open window when double clicking notification tray icon
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.WindowState ==FormWindowState.Minimized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                notifyIcon.Visible = false;
+                this.ShowInTaskbar = true;
             }
         }
 
