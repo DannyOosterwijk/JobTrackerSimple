@@ -31,9 +31,10 @@ namespace SimpleJobTracker
         ProfileManager profileManager = new ProfileManager();
         List<Control> profileControls = new List<Control>();
 
-        bool canScroll = false;
         int scrollLocation = 0;
         float scrollSpeed = 0.2f;
+
+        private Point startPoint = Point.Empty;
 
         public Visual()
         {
@@ -59,38 +60,7 @@ namespace SimpleJobTracker
             this.MouseWheel += ProfileListScroll;
         }
 
-        //Scroll through job profiles
-        private void ProfileListScroll(object sender, MouseEventArgs e)
-        {
-            if (canScroll)
-            {
-                var temp = scrollLocation - (int)(e.Delta * scrollSpeed);
-                if(temp < 0)
-                {
-                    scrollLocation = 0;
-                    ProfileList.AutoScrollPosition = new Point(0, scrollLocation);
-                }
-                else if (temp > ProfileList.VerticalScroll.Maximum)
-                {
-                    scrollLocation = ProfileList.VerticalScroll.Maximum;
-                    ProfileList.AutoScrollPosition = new Point(0, scrollLocation);
-                }
-                else
-                {
-                    scrollLocation = temp;
-                    ProfileList.VerticalScroll.Value = scrollLocation;
-                }
-            }
-            
-        }
-
-        private void Search_Click(object sender, EventArgs e)
-        {
-            var clickedButton = sender as Control;
-            var companyHeader = clickedButton.Parent as GroupBox;
-            searchWeb(companyHeader);
-        }
-
+        //Try to search the web and retrieve the amount of instances of the profiles tags
         private async Task<bool> searchWeb(GroupBox company)
         {
             Stopwatch sw = Stopwatch.StartNew(); //stopwatch for speed testing
@@ -121,22 +91,7 @@ namespace SimpleJobTracker
             return true;
         }
 
-        //open the setting menu for clicked profile
-        private void ProfileSetting_Click(object sender, EventArgs e)
-        {
-            CompanyDetails.Show();
-            Control settingButton = sender as Control;
-            GroupBox companyHeader = settingButton.Parent as GroupBox;
-            if (companyHeader != null)
-            {
-                JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(companyHeader)];
-                CompanyDetails.Text = profile.Name;
-                CompanyTags.Text = profile.Tags;
-                Console.WriteLine(companyHeader.TabIndex);
-            }
-
-        }
-
+        //Create a groupbox with the profile information and add it to the list
         private void AddProfileControler(JobProfile profile)
         {
             var con = new System.Windows.Forms.GroupBox();
@@ -202,14 +157,99 @@ namespace SimpleJobTracker
             ProfileList.Controls.Add(con);
         }
 
-        private void ProfileList_MouseEnter(object sender, EventArgs e)
+        ///
+        /// UI Linked Events
+        ///
+
+        //open the setting menu for clicked profile
+        private void ProfileSetting_Click(object sender, EventArgs e)
         {
-            canScroll = true;
+            CompanyDetails.Show();
+            Control settingButton = sender as Control;
+            GroupBox companyHeader = settingButton.Parent as GroupBox;
+            if (companyHeader != null)
+            {
+                JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(companyHeader)];
+                CompanyDetails.Text = profile.Name;
+                CompanyTags.Text = profile.Tags;
+                Console.WriteLine(companyHeader.TabIndex);
+            }
+
         }
 
-        private void ProfileList_MouseLeave(object sender, EventArgs e)
+        //Scroll through job profiles
+        private void ProfileListScroll(object sender, MouseEventArgs e)
         {
-            canScroll = true;
+            if (ProfileList.ClientRectangle.Contains(e.X, e.Y)) 
+            {
+                var temp = scrollLocation - (int)(e.Delta * scrollSpeed);
+                if (temp < 0)
+                {
+                    scrollLocation = 0;
+                    ProfileList.AutoScrollPosition = new Point(0, scrollLocation);
+                }
+                else if (temp > ProfileList.VerticalScroll.Maximum)
+                {
+                    scrollLocation = ProfileList.VerticalScroll.Maximum;
+                    ProfileList.AutoScrollPosition = new Point(0, scrollLocation);
+                }
+                else
+                {
+                    scrollLocation = temp;
+                    ProfileList.VerticalScroll.Value = scrollLocation;
+                }
+            }
+            
+        }
+
+        //Search individual job page
+        private void Search_Click(object sender, EventArgs e)
+        {
+            var clickedButton = sender as Control;
+            var companyHeader = clickedButton.Parent as GroupBox;
+            searchWeb(companyHeader);
+        }
+
+        //Exit application
+        private void Exit_Clicked(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        //Exit application
+        private void Minimize_Clicked(object sender, EventArgs e)
+        {
+            if (FormWindowState.Normal == this.WindowState)
+            {
+                //TODO: make application window minimize
+            }
+        }
+
+        //Start grabbing the window
+        private void Header_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                startPoint = new Point(e.X, e.Y);
+            }
+        }
+
+        //Let go of the window
+        private void Header_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                startPoint = Point.Empty;
+            }
+        }
+
+        //Move the window
+        private void Header_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (startPoint != Point.Empty)
+            {
+                Location = new Point(Left + (e.X - startPoint.X), Top + (e.Y - startPoint.Y));
+            }
         }
     }
 }

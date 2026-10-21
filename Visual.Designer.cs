@@ -42,7 +42,9 @@
             this.SearchButton = new System.Windows.Forms.Button();
             this.CompanyLink = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.MinimizeButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.BodyLayout.SuspendLayout();
@@ -146,8 +148,6 @@
             this.ProfileList.Size = new System.Drawing.Size(310, 392);
             this.ProfileList.TabIndex = 3;
             this.ProfileList.WrapContents = false;
-            this.ProfileList.MouseEnter += new System.EventHandler(this.ProfileList_MouseEnter);
-            this.ProfileList.MouseLeave += new System.EventHandler(this.ProfileList_MouseLeave);
             // 
             // TestProfile
             // 
@@ -222,9 +222,30 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.MinimizeButton);
+            this.splitContainer1.Panel2.Controls.Add(this.ExitButton);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
+            this.splitContainer1.Panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Header_MouseMove);
+            this.splitContainer1.Panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Header_MouseUp);
             this.splitContainer1.Size = new System.Drawing.Size(788, 34);
             this.splitContainer1.TabIndex = 3;
+            // 
+            // ExitButton
+            // 
+            this.ExitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
+            this.ExitButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ExitButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ExitButton.FlatAppearance.BorderSize = 2;
+            this.ExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.ExitButton.Location = new System.Drawing.Point(700, 0);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(34, 34);
+            this.ExitButton.TabIndex = 1;
+            this.ExitButton.Text = "X";
+            this.ExitButton.UseVisualStyleBackColor = false;
+            this.ExitButton.Click += new System.EventHandler(this.Exit_Clicked);
             // 
             // label1
             // 
@@ -237,6 +258,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Simple Job Tracker";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // MinimizeButton
+            // 
+            this.MinimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
+            this.MinimizeButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MinimizeButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.MinimizeButton.FlatAppearance.BorderSize = 2;
+            this.MinimizeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.MinimizeButton.Location = new System.Drawing.Point(666, 0);
+            this.MinimizeButton.Name = "MinimizeButton";
+            this.MinimizeButton.Size = new System.Drawing.Size(34, 34);
+            this.MinimizeButton.TabIndex = 2;
+            this.MinimizeButton.Text = "-";
+            this.MinimizeButton.UseVisualStyleBackColor = false;
+            this.MinimizeButton.Click += new System.EventHandler(this.Minimize_Clicked);
             // 
             // Visual
             // 
@@ -282,6 +319,8 @@
         private System.Windows.Forms.Label ResultLabel;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.TextBox CompanyLink;
+        private System.Windows.Forms.Button ExitButton;
+        private System.Windows.Forms.Button MinimizeButton;
     }
 }
 
