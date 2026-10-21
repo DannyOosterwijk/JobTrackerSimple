@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|d:\\gitprojects\\software\\dotnetcore\\jobtrackersimple\\visual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|solutionrelative:visual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|d:\\gitprojects\\software\\dotnetcore\\jobtrackersimple\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\visual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|solutionrelative:visual.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|d:\\gitprojects\\software\\dotnetcore\\jobtrackersimple\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\visual.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|solutionrelative:visual.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|d:\\gitprojects\\software\\dotnetcore\\jobtrackersimple\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|solutionrelative:mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE10DDAF-3F7F-41E3-9707-EB8FF0E28F48}|JobTrackerSimple.csproj|D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\services\\profilemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,11 +39,11 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Visual.cs [Design]",
-              "DocumentMoniker": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\Visual.cs",
-              "RelativeDocumentMoniker": "Visual.cs",
-              "ToolTip": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\Visual.cs [Design]",
-              "RelativeToolTip": "Visual.cs [Design]",
+              "Title": "MainForm.cs [Design]",
+              "DocumentMoniker": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\MainForm.cs [Design]",
+              "RelativeToolTip": "MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-15T18:14:33.882Z",
               "EditorCaption": " [Design]"
@@ -51,11 +51,11 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Visual.Designer.cs",
-              "DocumentMoniker": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\Visual.Designer.cs",
-              "RelativeDocumentMoniker": "Visual.Designer.cs",
-              "ToolTip": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\Visual.Designer.cs",
-              "RelativeToolTip": "Visual.Designer.cs",
+              "Title": "MainForm.Designer.cs",
+              "DocumentMoniker": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\MainForm.Designer.cs",
+              "RelativeDocumentMoniker": "MainForm.Designer.cs",
+              "ToolTip": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\MainForm.Designer.cs",
+              "RelativeToolTip": "MainForm.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-15T18:14:31.954Z",
@@ -64,12 +64,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Visual.cs",
-              "DocumentMoniker": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\Visual.cs",
-              "RelativeDocumentMoniker": "Visual.cs",
-              "ToolTip": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\Visual.cs",
-              "RelativeToolTip": "Visual.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAwwD4AAABZAAAAAAAAAA==",
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "D:\\GitProjects\\Software\\DotnetCore\\JobTrackerSimple\\MainForm.cs",
+              "RelativeToolTip": "MainForm.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-15T18:14:29.647Z",
               "EditorCaption": ""
@@ -84,8 +84,7 @@
               "RelativeToolTip": "Services\\ProfileManager.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-15T11:35:22.651Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-15T11:35:22.651Z"
             },
             {
               "$type": "Document",
@@ -97,8 +96,7 @@
               "RelativeToolTip": "Services\\JavaScraper.cs",
               "ViewState": "AgIAADcAAAAAAAAAAAAgwE0AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-12T13:26:58.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-12T13:26:58.436Z"
             }
           ]
         }

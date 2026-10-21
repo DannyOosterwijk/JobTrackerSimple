@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace SimpleJobTracker
 {
-    public partial class Visual : Form
+    public partial class MainForm : Form
     {
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
@@ -36,7 +36,7 @@ namespace SimpleJobTracker
 
         private Point startPoint = Point.Empty;
 
-        public Visual()
+        public MainForm()
         {
             InitializeComponent();
             

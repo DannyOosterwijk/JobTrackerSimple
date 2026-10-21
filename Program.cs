@@ -16,7 +16,7 @@ namespace SimpleJobTracker
         {
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            System.Windows.Forms.Application.Run(new Visual());
+            System.Windows.Forms.Application.Run(new MainForm());
         }
     }
 }
