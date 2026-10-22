@@ -66,7 +66,8 @@ namespace SimpleJobTracker.Services
                     fileContent = sr.ReadToEnd();
                 }
 
-                jobs = Newtonsoft.Json.JsonConvert.DeserializeObject<List<JobProfile>>(fileContent);//deserialize profiles
+                var deserializedJobs = Newtonsoft.Json.JsonConvert.DeserializeObject<List<JobProfile>>(fileContent);//deserialize profiles
+                jobs = deserializedJobs != null ? deserializedJobs : new List<JobProfile>();//Make list empty if save file is empty
             }
             catch (Exception ex)
             {
@@ -90,19 +91,23 @@ namespace SimpleJobTracker.Services
         }
 
         //Create a new job profile with a unique id
-        public void CreateJobProfile()
+        public JobProfile CreateJobProfile()
         {
             try
             {
                 JobProfile profile = new JobProfile();
                 profile.Id = jobs.Count;
+                profile.Name = "New Company" + jobs.Count.ToString();
 
                 jobs.Add(profile);
                 SaveJobProfiles();
+
+                return profile;
             }
             catch (Exception ex) 
             {
                 Console.WriteLine("ERROR: could not Create new job profile");
+                throw new Exception(ex.Message);
             }
             
         }

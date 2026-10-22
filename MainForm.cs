@@ -39,6 +39,10 @@ namespace SimpleJobTracker
         private float scrollSpeed = 0.2f;
         private Point startPoint = Point.Empty;
 
+        private Control selectedProfile;
+        private Color selectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
+        private Color defaultColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+
         //Notification tray
         private NotifyIcon notifyIcon;
 
@@ -50,22 +54,14 @@ namespace SimpleJobTracker
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 
             CompanyDetails.Hide();
-            TestProfile.Hide();
-            ProfileList.Controls.Remove(TestProfile);
-
-            List<JobProfile> jobProfiles = profileManager.GetjobProfiles();
-
-            for(int i = 0; i < jobProfiles.Count; i++)
-            {
-                AddProfileControler(jobProfiles[i]);
-            }
-
-            //Set Scroll settings
-            ProfileList.AutoScrollPosition = new Point(0, 0);
-            ProfileList.VerticalScroll.Maximum = (ProfileList.Controls.Count * (ProfileList.Controls[0].Height + ProfileList.Controls[0].Margin.Top + ProfileList.Controls[0].Margin.Bottom)) - ProfileList.Height;
-            this.MouseWheel += ProfileListScroll;
 
             InitializeIconContext();
+            UpdateProfileList();
+
+            //Set Scroll settings (make sure to do this after updating the profile list)
+            ProfileList.AutoScrollPosition = new Point(0, 0);
+            UpdateScrollSettings();
+            this.MouseWheel += ProfileListScroll;
         }
 
         //Initialize the icon in the notificiation tray
@@ -81,7 +77,49 @@ namespace SimpleJobTracker
                 BalloonTipTitle = "Simple Job Tracker",
                 BalloonTipText = "Finished checking job pages"
             };
-            notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+            notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
+        }
+
+        //Set the max scroll height
+        private void UpdateScrollSettings()
+        {
+            int scrollMaximum = ProfileList.Controls[0].Height + ProfileList.Controls[0].Margin.Top + ProfileList.Controls[0].Margin.Bottom;//Add height of profile control
+            scrollMaximum *= ProfileList.Controls.Count - 1; //Multiply by amount of profiles
+            scrollMaximum += CreateLabel.Height + CreateLabel.Margin.Top + CreateLabel.Margin.Bottom; //Add Create label height
+            scrollMaximum -= ProfileList.Height; //Remove height of list window
+            ProfileList.VerticalScroll.Maximum = scrollMaximum;
+
+            //If scroll height become lower, make sure windows scrolls with it
+            if(scrollLocation > ProfileList.VerticalScroll.Maximum)
+            {
+                scrollLocation = ProfileList.VerticalScroll.Maximum;
+                ProfileList.AutoScrollPosition = new Point(0, scrollLocation);
+            } 
+        }
+
+        //Add all the profiles to the list. will overwrite old controls if the list is already filled
+        private void UpdateProfileList()
+        {
+            ProfileList.Controls.Remove(CreateLabel);
+            int existingControls = ProfileList.Controls.Count;
+            var profiles = profileManager.GetjobProfiles();
+            if(profiles.Count == 0) { 
+                ProfileList.Controls.Clear(); 
+            }
+
+            for (int i = 0; i < profiles.Count; i++) {
+                if(i < existingControls)
+                {
+                    ProfileList.Controls[i].Text = profiles[i].Name;
+                    ProfileList.Controls[i].Controls[1].Text = "";
+                    ProfileList.Controls[i].Controls[3].Text = profiles[i].Link;
+                }
+                else
+                {
+                    AddProfileControler(profiles[i]);
+                }
+            }
+            ProfileList.Controls.Add(CreateLabel);
         }
 
         //Try to search the web and retrieve the amount of instances of the profiles tags
@@ -116,6 +154,7 @@ namespace SimpleJobTracker
         }
 
         //Create a groupbox with the profile information and add it to the list
+        //TODO: Turn profiles into a class
         private void AddProfileControler(JobProfile profile)
         {
             var con = new System.Windows.Forms.GroupBox();
@@ -193,10 +232,15 @@ namespace SimpleJobTracker
             GroupBox companyHeader = settingButton.Parent as GroupBox;
             if (companyHeader != null)
             {
+                //Fill details panel with information
                 JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(companyHeader)];
                 CompanyDetails.Text = profile.Name;
                 CompanyTags.Text = profile.Tags;
-                Console.WriteLine(companyHeader.TabIndex);
+
+                //Change background color to visualize selected profile
+                if (selectedProfile != null) selectedProfile.BackColor = defaultColor;
+                selectedProfile = companyHeader;
+                selectedProfile.BackColor = selectedColor;
             }
 
         }
@@ -246,19 +290,19 @@ namespace SimpleJobTracker
             if (this.WindowState != FormWindowState.Minimized)
             {
                 this.WindowState = FormWindowState.Minimized;
-                notifyIcon.Visible = true;
                 this.ShowInTaskbar = false;
+                notifyIcon.Visible = true;
             }
         }
 
-        //Open window when double clicking notification tray icon
-        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        //
+        private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            if (this.WindowState ==FormWindowState.Minimized)
+            if (this.WindowState == FormWindowState.Minimized)
             {
                 this.WindowState = FormWindowState.Normal;
-                notifyIcon.Visible = false;
                 this.ShowInTaskbar = true;
+                notifyIcon.Visible = false;
             }
         }
 
@@ -287,6 +331,37 @@ namespace SimpleJobTracker
             {
                 Location = new Point(Left + (e.X - startPoint.X), Top + (e.Y - startPoint.Y));
             }
+        }
+
+        private void Create_Click(object sender, EventArgs e)
+        {
+            var profile = profileManager.CreateJobProfile();
+            ProfileList.Controls.Remove(CreateLabel);
+            AddProfileControler(profile);
+            ProfileList.Controls.Add(CreateLabel);
+            UpdateScrollSettings();
+        }
+
+        private void Create_MouseDown(object sender, MouseEventArgs e)
+        {
+            var button = sender as Control;
+            button.BackColor = selectedColor;
+        }
+
+        private void Create_MouseUp(object sender, MouseEventArgs e)
+        {
+            var button = sender as Control;
+            button.BackColor = defaultColor;
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(selectedProfile)];
+            profileManager.DeleteJobProfile(profile);
+            ProfileList.Controls.Remove(selectedProfile);
+            selectedProfile = null;
+            CompanyDetails.Hide();
+            UpdateScrollSettings();
         }
     }
 }

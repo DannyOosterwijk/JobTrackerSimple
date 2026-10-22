@@ -41,10 +41,12 @@
             this.ResultLabel = new System.Windows.Forms.Label();
             this.SearchButton = new System.Windows.Forms.Button();
             this.CompanyLink = new System.Windows.Forms.TextBox();
+            this.CreateLabel = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.MinimizeButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.MinimizeButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.BodyLayout.SuspendLayout();
@@ -118,6 +120,7 @@
             // 
             // CompanyDetails
             // 
+            this.CompanyDetails.Controls.Add(this.DeleteButton);
             this.CompanyDetails.Controls.Add(this.CompanyTags);
             this.CompanyDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CompanyDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -141,6 +144,7 @@
             // ProfileList
             // 
             this.ProfileList.Controls.Add(this.TestProfile);
+            this.ProfileList.Controls.Add(this.CreateLabel);
             this.ProfileList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ProfileList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.ProfileList.Location = new System.Drawing.Point(3, 3);
@@ -207,6 +211,23 @@
             this.CompanyLink.Size = new System.Drawing.Size(290, 20);
             this.CompanyLink.TabIndex = 0;
             // 
+            // CreateLabel
+            // 
+            this.CreateLabel.AutoSize = true;
+            this.CreateLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.CreateLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CreateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.CreateLabel.Location = new System.Drawing.Point(3, 106);
+            this.CreateLabel.Name = "CreateLabel";
+            this.CreateLabel.Size = new System.Drawing.Size(300, 33);
+            this.CreateLabel.TabIndex = 3;
+            this.CreateLabel.Text = "+";
+            this.CreateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CreateLabel.Click += new System.EventHandler(this.Create_Click);
+            this.CreateLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Create_MouseDown);
+            this.CreateLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Create_MouseUp);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -230,6 +251,22 @@
             this.splitContainer1.Panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Header_MouseUp);
             this.splitContainer1.Size = new System.Drawing.Size(788, 34);
             this.splitContainer1.TabIndex = 3;
+            // 
+            // MinimizeButton
+            // 
+            this.MinimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
+            this.MinimizeButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MinimizeButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.MinimizeButton.FlatAppearance.BorderSize = 2;
+            this.MinimizeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.MinimizeButton.Location = new System.Drawing.Point(666, 0);
+            this.MinimizeButton.Name = "MinimizeButton";
+            this.MinimizeButton.Size = new System.Drawing.Size(34, 34);
+            this.MinimizeButton.TabIndex = 2;
+            this.MinimizeButton.Text = "-";
+            this.MinimizeButton.UseVisualStyleBackColor = false;
+            this.MinimizeButton.Click += new System.EventHandler(this.Minimize_Clicked);
             // 
             // ExitButton
             // 
@@ -259,23 +296,19 @@
             this.label1.Text = "Simple Job Tracker";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // MinimizeButton
+            // DeleteButton
             // 
-            this.MinimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
-            this.MinimizeButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MinimizeButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.MinimizeButton.FlatAppearance.BorderSize = 2;
-            this.MinimizeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.MinimizeButton.Location = new System.Drawing.Point(666, 0);
-            this.MinimizeButton.Name = "MinimizeButton";
-            this.MinimizeButton.Size = new System.Drawing.Size(34, 34);
-            this.MinimizeButton.TabIndex = 2;
-            this.MinimizeButton.Text = "-";
-            this.MinimizeButton.UseVisualStyleBackColor = false;
-            this.MinimizeButton.Click += new System.EventHandler(this.Minimize_Clicked);
+            this.DeleteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.DeleteButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.DeleteButton.Location = new System.Drawing.Point(355, 356);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(100, 30);
+            this.DeleteButton.TabIndex = 6;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = false;
+            this.DeleteButton.Click += new System.EventHandler(this.Delete_Click);
             // 
-            // Visual
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -284,7 +317,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Visual";
+            this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "Simple Job Tracker";
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -294,6 +327,7 @@
             this.CompanyDetails.ResumeLayout(false);
             this.CompanyDetails.PerformLayout();
             this.ProfileList.ResumeLayout(false);
+            this.ProfileList.PerformLayout();
             this.TestProfile.ResumeLayout(false);
             this.TestProfile.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -321,6 +355,8 @@
         private System.Windows.Forms.TextBox CompanyLink;
         private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Button MinimizeButton;
+        private System.Windows.Forms.Label CreateLabel;
+        private System.Windows.Forms.Button DeleteButton;
     }
 }
 
