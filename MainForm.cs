@@ -110,9 +110,8 @@ namespace SimpleJobTracker
             for (int i = 0; i < profiles.Count; i++) {
                 if(i < existingControls)
                 {
-                    ProfileList.Controls[i].Text = profiles[i].Name;
-                    ProfileList.Controls[i].Controls[1].Text = "";
-                    ProfileList.Controls[i].Controls[3].Text = profiles[i].Link;
+                    ProfileList.Controls[i].Controls[0].Text = profiles[i].Name;
+                    ProfileList.Controls[i].Controls[2].Text = "";
                 }
                 else
                 {
@@ -161,7 +160,8 @@ namespace SimpleJobTracker
             var settingButton = new System.Windows.Forms.Button();
             var resultLabel = new System.Windows.Forms.Label();
             var searchButton = new System.Windows.Forms.Button();
-            var companyLink = new System.Windows.Forms.TextBox();
+            var companyName = new System.Windows.Forms.Label();
+
 
             // CREATING BUTTON
             settingButton.BackColor = SettingButton.BackColor;
@@ -192,21 +192,20 @@ namespace SimpleJobTracker
             searchButton.UseVisualStyleBackColor = SearchButton.UseVisualStyleBackColor;
             searchButton.Click += new System.EventHandler(this.Search_Click);
 
-            // CREATING COMPANY LINK
-            companyLink.BackColor = CompanyLink.BackColor;
-            companyLink.Dock = CompanyLink.Dock;
-            companyLink.ForeColor = CompanyLink.ForeColor;
-            companyLink.Location = CompanyLink.Location;
-            companyLink.Name = "CompanyLink " + profile.Id;
-            companyLink.Size = CompanyLink.Size;
-            companyLink.TabIndex = CompanyLink.TabIndex;
-            companyLink.Text = profile.Link;
+            // CREATING NAME LABEL
+            companyName.Dock = CompanyName.Dock;
+            companyName.Font = CompanyName.Font;
+            companyName.Location = CompanyName.Location;
+            companyName.Name = "CompanyName " + profile.Id;
+            companyName.Size = CompanyName.Size;
+            companyName.TabIndex = CompanyName.TabIndex;
+            companyName.Text = profile.Name;
 
             // CREATING PROFILE GROUPBOX
+            con.Controls.Add(companyName);
             con.Controls.Add(settingButton);
             con.Controls.Add(resultLabel);
             con.Controls.Add(searchButton);
-            con.Controls.Add(companyLink);
             con.Dock = TestProfile.Dock;
             con.ForeColor = TestProfile.ForeColor;
             con.Location = TestProfile.Location;
@@ -215,7 +214,6 @@ namespace SimpleJobTracker
             con.Size = TestProfile.Size;
             con.TabIndex = TestProfile.TabIndex;
             con.TabStop = false;
-            con.Text = profile.Name;
 
             ProfileList.Controls.Add(con);
         }
@@ -234,8 +232,10 @@ namespace SimpleJobTracker
             {
                 //Fill details panel with information
                 JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(companyHeader)];
-                CompanyDetails.Text = profile.Name;
-                CompanyTags.Text = profile.Tags;
+                SettingsName.Text = profile.Name;
+                SettingsLink.Text = profile.Link;
+                SettingsTags.Text = profile.Tags;
+                SaveWarningImage.Hide();
 
                 //Change background color to visualize selected profile
                 if (selectedProfile != null) selectedProfile.BackColor = defaultColor;
@@ -354,14 +354,50 @@ namespace SimpleJobTracker
             button.BackColor = defaultColor;
         }
 
+        //Delete the selected profile
         private void Delete_Click(object sender, EventArgs e)
         {
+            //Get selected profile and delete it
             JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(selectedProfile)];
             profileManager.DeleteJobProfile(profile);
+            
+            //Remove the control for the removed profile
             ProfileList.Controls.Remove(selectedProfile);
             selectedProfile = null;
+
+            //Hide settings menu
             CompanyDetails.Hide();
             UpdateScrollSettings();
+        }
+
+        //Save Settings to the selected profile
+        private void Save_Click(object sender, EventArgs e)
+        {
+            //Get selected profile and set its values to the values in settings
+            JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(selectedProfile)];
+            profile.Name = SettingsName.Text;
+            profile.Link = SettingsLink.Text;
+            profile.Tags = SettingsTags.Text;
+
+            profileManager.UpdateJobProfile(profile); //update profile in save file
+            UpdateProfileList();
+            SaveWarningImage.Hide();
+        }
+
+        private void SettingsInput_TextChanged(object sender, EventArgs e)
+        {
+            if(selectedProfile != null)
+            {
+                JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(selectedProfile)];
+                if (profile.Name != SettingsName.Text || profile.Link != SettingsLink.Text || profile.Tags != SettingsTags.Text)
+                {
+                    SaveWarningImage.Show();
+                }
+                else
+                {
+                    SaveWarningImage.Hide();
+                }
+            }
         }
     }
 }
