@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\JobProfile.cs" />
+    <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Services\JavaScraper.cs" />
     <Compile Include="Services\ProfileManager.cs" />
     <Compile Include="Services\Scraper.cs" />

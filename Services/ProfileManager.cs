@@ -133,5 +133,23 @@ namespace SimpleJobTracker.Services
             }
         }
 
+        public void AddNewResult(JobProfile profile, int amount)
+        {
+            try
+            {
+                string date = DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Day.ToString();
+                if(profile.History == null)
+                {
+                    profile.History = new List<SearchResult>();
+                }
+                profile.History.Add(new SearchResult() { Amount = amount, Date = date });
+                UpdateJobProfile(profile);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: could not add date to history");
+            }
+        }
+
     }
 }

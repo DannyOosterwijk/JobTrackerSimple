@@ -42,6 +42,7 @@ namespace SimpleJobTracker
         private Control selectedProfile;
         private Color selectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
         private Color defaultColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+        private Color buttonColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
 
         //Notification tray
         private NotifyIcon notifyIcon;
@@ -121,11 +122,40 @@ namespace SimpleJobTracker
             ProfileList.Controls.Add(CreateLabel);
         }
 
+        public void UpdateSettingMenu(JobProfile profile)
+        {
+            //Fill details panel with information
+            SettingsName.Text = profile.Name;
+            SettingsLink.Text = profile.Link;
+            SettingsTags.Text = profile.Tags;
+
+            //Convert history into text
+            //TODO: Turn history into a diagram
+            string history = "";
+            if (profile.History != null)
+            {
+                for(int i = profile.History.Count - 1; i >= 0; i--)
+                {
+                    history += profile.History[i].Date + ": ";
+                    history += profile.History[i].Amount.ToString();
+                    history += "\n";
+                }
+            }
+
+            SettingsHistory.Text = history;
+            SaveWarningImage.Hide();
+
+            //Change background color to visualize selected profile
+            
+        }
+
         //Try to search the web and retrieve the amount of instances of the profiles tags
         private async Task<bool> searchWeb(GroupBox company)
         {
-            Stopwatch sw = Stopwatch.StartNew(); //stopwatch for speed testing
-            company.Controls[1].Text = "";
+            Stopwatch sw = Stopwatch.StartNew(); //Stopwatch for speed testing
+            company.Controls[2].Text = ""; //Empty search result
+            company.Controls[3].Enabled = false; //Disable search button
+            company.Controls[3].BackColor = selectedColor;
 
             try
             {
@@ -135,7 +165,13 @@ namespace SimpleJobTracker
                 var tagString = profile.Tags;
                 string[] companyTags = tagString.Split(' ');
                 int amount = await javaScraper.CheckWeb(profile.Link, companyTags);
-                company.Controls[1].Text = amount.ToString();
+                company.Controls[2].Text = amount.ToString();
+
+                if (profile.History == null || profile.History[profile.History.Count - 1].Amount != amount)
+                {
+                    profileManager.AddNewResult(profile, amount);
+                    UpdateSettingMenu(profile);
+                }
             }
             catch (Exception ex)
             {
@@ -148,7 +184,10 @@ namespace SimpleJobTracker
             int roundedTime = (int)(time / 10f);
             float timeInSeconds = roundedTime / 100f;
             Console.WriteLine("Succesfully gotten job page info, time elapsed: " + timeInSeconds);
-            
+
+            company.Controls[3].Enabled = true; //Enable search button
+            company.Controls[3].BackColor = buttonColor;
+
             return true;
         }
 
@@ -230,17 +269,12 @@ namespace SimpleJobTracker
             GroupBox companyHeader = settingButton.Parent as GroupBox;
             if (companyHeader != null)
             {
-                //Fill details panel with information
-                JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(companyHeader)];
-                SettingsName.Text = profile.Name;
-                SettingsLink.Text = profile.Link;
-                SettingsTags.Text = profile.Tags;
-                SaveWarningImage.Hide();
-
-                //Change background color to visualize selected profile
                 if (selectedProfile != null) selectedProfile.BackColor = defaultColor;
                 selectedProfile = companyHeader;
                 selectedProfile.BackColor = selectedColor;
+
+                JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(companyHeader)];
+                UpdateSettingMenu(profile);
             }
 
         }

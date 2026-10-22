@@ -12,5 +12,6 @@ namespace SimpleJobTracker.Models
         public string Name { get; set; }
         public string Link { get; set; }
         public string Tags { get; set; }
+        public List<SearchResult> History { get; set; } = new List<SearchResult>();
     }
 }

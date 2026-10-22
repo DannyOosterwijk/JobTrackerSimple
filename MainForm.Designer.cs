@@ -34,12 +34,18 @@
             this.BodyLayout = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.CompanyDetails = new System.Windows.Forms.GroupBox();
+            this.SaveWarningImage = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.SettingsTagLabel = new System.Windows.Forms.Label();
+            this.SettingsLinkLabel = new System.Windows.Forms.Label();
+            this.SettingsLink = new System.Windows.Forms.TextBox();
             this.SettingsNameLabel = new System.Windows.Forms.Label();
             this.SettingsTags = new System.Windows.Forms.TextBox();
             this.SettingsName = new System.Windows.Forms.TextBox();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.ProfileList = new System.Windows.Forms.FlowLayoutPanel();
             this.TestProfile = new System.Windows.Forms.GroupBox();
+            this.CompanyName = new System.Windows.Forms.Label();
             this.SettingButton = new System.Windows.Forms.Button();
             this.ResultLabel = new System.Windows.Forms.Label();
             this.SearchButton = new System.Windows.Forms.Button();
@@ -48,22 +54,18 @@
             this.MinimizeButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.SettingsLink = new System.Windows.Forms.TextBox();
-            this.SettingsLinkLabel = new System.Windows.Forms.Label();
-            this.SettingsTagLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.SaveWarningImage = new System.Windows.Forms.PictureBox();
-            this.CompanyName = new System.Windows.Forms.Label();
+            this.SettingsHistoryLabel = new System.Windows.Forms.Label();
+            this.SettingsHistory = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.BodyLayout.SuspendLayout();
             this.CompanyDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveWarningImage)).BeginInit();
             this.ProfileList.SuspendLayout();
             this.TestProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SaveWarningImage)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -128,6 +130,8 @@
             // 
             // CompanyDetails
             // 
+            this.CompanyDetails.Controls.Add(this.SettingsHistory);
+            this.CompanyDetails.Controls.Add(this.SettingsHistoryLabel);
             this.CompanyDetails.Controls.Add(this.SaveWarningImage);
             this.CompanyDetails.Controls.Add(this.button1);
             this.CompanyDetails.Controls.Add(this.SettingsTagLabel);
@@ -145,6 +149,57 @@
             this.CompanyDetails.TabIndex = 2;
             this.CompanyDetails.TabStop = false;
             this.CompanyDetails.Text = "groupBox2";
+            // 
+            // SaveWarningImage
+            // 
+            this.SaveWarningImage.Image = global::SimpleJobTracker.Properties.Resources.Warning;
+            this.SaveWarningImage.Location = new System.Drawing.Point(112, 356);
+            this.SaveWarningImage.Name = "SaveWarningImage";
+            this.SaveWarningImage.Size = new System.Drawing.Size(30, 30);
+            this.SaveWarningImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.SaveWarningImage.TabIndex = 14;
+            this.SaveWarningImage.TabStop = false;
+            this.SaveWarningImage.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.button1.Location = new System.Drawing.Point(6, 356);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 30);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Save";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Save_Click);
+            // 
+            // SettingsTagLabel
+            // 
+            this.SettingsTagLabel.AutoSize = true;
+            this.SettingsTagLabel.Location = new System.Drawing.Point(6, 121);
+            this.SettingsTagLabel.Name = "SettingsTagLabel";
+            this.SettingsTagLabel.Size = new System.Drawing.Size(31, 13);
+            this.SettingsTagLabel.TabIndex = 12;
+            this.SettingsTagLabel.Text = "Tags";
+            // 
+            // SettingsLinkLabel
+            // 
+            this.SettingsLinkLabel.AutoSize = true;
+            this.SettingsLinkLabel.Location = new System.Drawing.Point(6, 67);
+            this.SettingsLinkLabel.Name = "SettingsLinkLabel";
+            this.SettingsLinkLabel.Size = new System.Drawing.Size(27, 13);
+            this.SettingsLinkLabel.TabIndex = 11;
+            this.SettingsLinkLabel.Text = "Link";
+            // 
+            // SettingsLink
+            // 
+            this.SettingsLink.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.SettingsLink.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.SettingsLink.Location = new System.Drawing.Point(6, 83);
+            this.SettingsLink.Name = "SettingsLink";
+            this.SettingsLink.Size = new System.Drawing.Size(405, 20);
+            this.SettingsLink.TabIndex = 10;
+            this.SettingsLink.TextChanged += new System.EventHandler(this.SettingsInput_TextChanged);
             // 
             // SettingsNameLabel
             // 
@@ -213,6 +268,16 @@
             this.TestProfile.Size = new System.Drawing.Size(300, 100);
             this.TestProfile.TabIndex = 2;
             this.TestProfile.TabStop = false;
+            // 
+            // CompanyName
+            // 
+            this.CompanyName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CompanyName.Location = new System.Drawing.Point(5, 23);
+            this.CompanyName.Name = "CompanyName";
+            this.CompanyName.Size = new System.Drawing.Size(290, 25);
+            this.CompanyName.TabIndex = 10;
+            this.CompanyName.Text = "Test Company";
             // 
             // SettingButton
             // 
@@ -331,66 +396,23 @@
             this.label1.Text = "Simple Job Tracker";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // SettingsLink
+            // SettingsHistoryLabel
             // 
-            this.SettingsLink.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.SettingsLink.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.SettingsLink.Location = new System.Drawing.Point(6, 83);
-            this.SettingsLink.Name = "SettingsLink";
-            this.SettingsLink.Size = new System.Drawing.Size(405, 20);
-            this.SettingsLink.TabIndex = 10;
-            this.SettingsLink.TextChanged += new System.EventHandler(this.SettingsInput_TextChanged);
+            this.SettingsHistoryLabel.AutoSize = true;
+            this.SettingsHistoryLabel.Location = new System.Drawing.Point(6, 169);
+            this.SettingsHistoryLabel.Name = "SettingsHistoryLabel";
+            this.SettingsHistoryLabel.Size = new System.Drawing.Size(39, 13);
+            this.SettingsHistoryLabel.TabIndex = 15;
+            this.SettingsHistoryLabel.Text = "History";
             // 
-            // SettingsLinkLabel
+            // SettingsHistory
             // 
-            this.SettingsLinkLabel.AutoSize = true;
-            this.SettingsLinkLabel.Location = new System.Drawing.Point(6, 67);
-            this.SettingsLinkLabel.Name = "SettingsLinkLabel";
-            this.SettingsLinkLabel.Size = new System.Drawing.Size(27, 13);
-            this.SettingsLinkLabel.TabIndex = 11;
-            this.SettingsLinkLabel.Text = "Link";
-            // 
-            // SettingsTagLabel
-            // 
-            this.SettingsTagLabel.AutoSize = true;
-            this.SettingsTagLabel.Location = new System.Drawing.Point(6, 121);
-            this.SettingsTagLabel.Name = "SettingsTagLabel";
-            this.SettingsTagLabel.Size = new System.Drawing.Size(31, 13);
-            this.SettingsTagLabel.TabIndex = 12;
-            this.SettingsTagLabel.Text = "Tags";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.button1.Location = new System.Drawing.Point(6, 356);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 30);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Save_Click);
-            // 
-            // SaveWarningImage
-            // 
-            this.SaveWarningImage.Image = global::SimpleJobTracker.Properties.Resources.Warning;
-            this.SaveWarningImage.Location = new System.Drawing.Point(112, 356);
-            this.SaveWarningImage.Name = "SaveWarningImage";
-            this.SaveWarningImage.Size = new System.Drawing.Size(30, 30);
-            this.SaveWarningImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.SaveWarningImage.TabIndex = 14;
-            this.SaveWarningImage.TabStop = false;
-            this.SaveWarningImage.Visible = false;
-            // 
-            // CompanyName
-            // 
-            this.CompanyName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CompanyName.Location = new System.Drawing.Point(5, 23);
-            this.CompanyName.Name = "CompanyName";
-            this.CompanyName.Size = new System.Drawing.Size(290, 25);
-            this.CompanyName.TabIndex = 10;
-            this.CompanyName.Text = "Test Company";
+            this.SettingsHistory.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SettingsHistory.Location = new System.Drawing.Point(6, 191);
+            this.SettingsHistory.Name = "SettingsHistory";
+            this.SettingsHistory.Size = new System.Drawing.Size(405, 150);
+            this.SettingsHistory.TabIndex = 16;
+            this.SettingsHistory.Text = "History";
             // 
             // MainForm
             // 
@@ -410,13 +432,13 @@
             this.BodyLayout.PerformLayout();
             this.CompanyDetails.ResumeLayout(false);
             this.CompanyDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveWarningImage)).EndInit();
             this.ProfileList.ResumeLayout(false);
             this.ProfileList.PerformLayout();
             this.TestProfile.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SaveWarningImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -448,6 +470,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox SaveWarningImage;
         private System.Windows.Forms.Label CompanyName;
+        private System.Windows.Forms.Label SettingsHistoryLabel;
+        private System.Windows.Forms.Label SettingsHistory;
     }
 }
 
