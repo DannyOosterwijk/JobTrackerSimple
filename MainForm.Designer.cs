@@ -34,6 +34,7 @@
             this.BodyLayout = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.CompanyDetails = new System.Windows.Forms.GroupBox();
+            this.SearchButton = new System.Windows.Forms.Button();
             this.SettingsHistory = new System.Windows.Forms.Label();
             this.SettingsHistoryLabel = new System.Windows.Forms.Label();
             this.SaveWarningImage = new System.Windows.Forms.PictureBox();
@@ -45,27 +46,26 @@
             this.SettingsTags = new System.Windows.Forms.TextBox();
             this.SettingsName = new System.Windows.Forms.TextBox();
             this.DeleteButton = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.MinimizeButton = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.ProfileList = new System.Windows.Forms.FlowLayoutPanel();
             this.TestProfile = new System.Windows.Forms.GroupBox();
             this.CompanyName = new System.Windows.Forms.Label();
             this.SettingButton = new System.Windows.Forms.Button();
             this.ResultLabel = new System.Windows.Forms.Label();
             this.CreateLabel = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.MinimizeButton = new System.Windows.Forms.Button();
-            this.ExitButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SearchButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.BodyLayout.SuspendLayout();
             this.CompanyDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SaveWarningImage)).BeginInit();
-            this.ProfileList.SuspendLayout();
-            this.TestProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.ProfileList.SuspendLayout();
+            this.TestProfile.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -102,9 +102,9 @@
             this.BodyLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.40404F));
             this.BodyLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.BodyLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.59596F));
+            this.BodyLayout.Controls.Add(this.ProfileList, 0, 0);
             this.BodyLayout.Controls.Add(this.label2, 1, 0);
             this.BodyLayout.Controls.Add(this.CompanyDetails, 2, 0);
-            this.BodyLayout.Controls.Add(this.ProfileList, 0, 0);
             this.BodyLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BodyLayout.Location = new System.Drawing.Point(0, 0);
             this.BodyLayout.Name = "BodyLayout";
@@ -151,12 +151,24 @@
             this.CompanyDetails.TabStop = false;
             this.CompanyDetails.Text = "groupBox2";
             // 
+            // SearchButton
+            // 
+            this.SearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.SearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.SearchButton.Location = new System.Drawing.Point(172, 356);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(147, 30);
+            this.SearchButton.TabIndex = 17;
+            this.SearchButton.Text = "Manual Search";
+            this.SearchButton.UseVisualStyleBackColor = false;
+            this.SearchButton.Click += new System.EventHandler(this.Search_Click);
+            // 
             // SettingsHistory
             // 
             this.SettingsHistory.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.SettingsHistory.Location = new System.Drawing.Point(6, 191);
             this.SettingsHistory.Name = "SettingsHistory";
-            this.SettingsHistory.Size = new System.Drawing.Size(405, 150);
+            this.SettingsHistory.Size = new System.Drawing.Size(405, 90);
             this.SettingsHistory.TabIndex = 16;
             this.SettingsHistory.Text = "History";
             // 
@@ -261,81 +273,6 @@
             this.DeleteButton.UseVisualStyleBackColor = false;
             this.DeleteButton.Click += new System.EventHandler(this.Delete_Click);
             // 
-            // ProfileList
-            // 
-            this.ProfileList.Controls.Add(this.TestProfile);
-            this.ProfileList.Controls.Add(this.CreateLabel);
-            this.ProfileList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ProfileList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.ProfileList.Location = new System.Drawing.Point(3, 3);
-            this.ProfileList.Name = "ProfileList";
-            this.ProfileList.Size = new System.Drawing.Size(310, 392);
-            this.ProfileList.TabIndex = 3;
-            this.ProfileList.WrapContents = false;
-            // 
-            // TestProfile
-            // 
-            this.TestProfile.Controls.Add(this.CompanyName);
-            this.TestProfile.Controls.Add(this.SettingButton);
-            this.TestProfile.Controls.Add(this.ResultLabel);
-            this.TestProfile.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TestProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.TestProfile.Location = new System.Drawing.Point(3, 3);
-            this.TestProfile.Name = "TestProfile";
-            this.TestProfile.Padding = new System.Windows.Forms.Padding(5, 10, 5, 3);
-            this.TestProfile.Size = new System.Drawing.Size(300, 100);
-            this.TestProfile.TabIndex = 2;
-            this.TestProfile.TabStop = false;
-            // 
-            // CompanyName
-            // 
-            this.CompanyName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CompanyName.Location = new System.Drawing.Point(5, 23);
-            this.CompanyName.Name = "CompanyName";
-            this.CompanyName.Size = new System.Drawing.Size(290, 25);
-            this.CompanyName.TabIndex = 10;
-            this.CompanyName.Text = "Test Company";
-            // 
-            // SettingButton
-            // 
-            this.SettingButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.SettingButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.SettingButton.Location = new System.Drawing.Point(242, 64);
-            this.SettingButton.Name = "SettingButton";
-            this.SettingButton.Size = new System.Drawing.Size(50, 30);
-            this.SettingButton.TabIndex = 3;
-            this.SettingButton.Text = ". . .";
-            this.SettingButton.UseVisualStyleBackColor = false;
-            this.SettingButton.Click += new System.EventHandler(this.ProfileSetting_Click);
-            // 
-            // ResultLabel
-            // 
-            this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResultLabel.Location = new System.Drawing.Point(8, 64);
-            this.ResultLabel.Name = "ResultLabel";
-            this.ResultLabel.Size = new System.Drawing.Size(228, 30);
-            this.ResultLabel.TabIndex = 2;
-            this.ResultLabel.Text = "Tags Found: Lorem Ipsum Test ext galore ";
-            this.ResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CreateLabel
-            // 
-            this.CreateLabel.AutoSize = true;
-            this.CreateLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.CreateLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CreateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.CreateLabel.Location = new System.Drawing.Point(3, 106);
-            this.CreateLabel.Name = "CreateLabel";
-            this.CreateLabel.Size = new System.Drawing.Size(300, 33);
-            this.CreateLabel.TabIndex = 3;
-            this.CreateLabel.Text = "+";
-            this.CreateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.CreateLabel.Click += new System.EventHandler(this.Create_Click);
-            this.CreateLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Create_MouseDown);
-            this.CreateLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Create_MouseUp);
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -404,17 +341,78 @@
             this.label1.Text = "Simple Job Tracker";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // SearchButton
+            // ProfileList
             // 
-            this.SearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.SearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.SearchButton.Location = new System.Drawing.Point(172, 356);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(147, 30);
-            this.SearchButton.TabIndex = 17;
-            this.SearchButton.Text = "Manual Search";
-            this.SearchButton.UseVisualStyleBackColor = false;
-            this.SearchButton.Click += new System.EventHandler(this.Search_Click);
+            this.ProfileList.Controls.Add(this.TestProfile);
+            this.ProfileList.Controls.Add(this.CreateLabel);
+            this.ProfileList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ProfileList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.ProfileList.Location = new System.Drawing.Point(3, 3);
+            this.ProfileList.Name = "ProfileList";
+            this.ProfileList.Size = new System.Drawing.Size(310, 392);
+            this.ProfileList.TabIndex = 5;
+            this.ProfileList.WrapContents = false;
+            // 
+            // TestProfile
+            // 
+            this.TestProfile.Controls.Add(this.CompanyName);
+            this.TestProfile.Controls.Add(this.SettingButton);
+            this.TestProfile.Controls.Add(this.ResultLabel);
+            this.TestProfile.Dock = System.Windows.Forms.DockStyle.Right;
+            this.TestProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.TestProfile.Location = new System.Drawing.Point(3, 3);
+            this.TestProfile.Name = "TestProfile";
+            this.TestProfile.Padding = new System.Windows.Forms.Padding(5, 10, 5, 3);
+            this.TestProfile.Size = new System.Drawing.Size(300, 100);
+            this.TestProfile.TabIndex = 2;
+            this.TestProfile.TabStop = false;
+            // 
+            // CompanyName
+            // 
+            this.CompanyName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CompanyName.Location = new System.Drawing.Point(5, 23);
+            this.CompanyName.Name = "CompanyName";
+            this.CompanyName.Size = new System.Drawing.Size(290, 25);
+            this.CompanyName.TabIndex = 10;
+            this.CompanyName.Text = "Test Company";
+            // 
+            // SettingButton
+            // 
+            this.SettingButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.SettingButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.SettingButton.Location = new System.Drawing.Point(242, 64);
+            this.SettingButton.Name = "SettingButton";
+            this.SettingButton.Size = new System.Drawing.Size(50, 30);
+            this.SettingButton.TabIndex = 3;
+            this.SettingButton.Text = ". . .";
+            this.SettingButton.UseVisualStyleBackColor = false;
+            this.SettingButton.Click += new System.EventHandler(this.ProfileSetting_Click);
+            // 
+            // ResultLabel
+            // 
+            this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResultLabel.Location = new System.Drawing.Point(8, 64);
+            this.ResultLabel.Name = "ResultLabel";
+            this.ResultLabel.Size = new System.Drawing.Size(228, 30);
+            this.ResultLabel.TabIndex = 2;
+            this.ResultLabel.Text = "Tags Found: Lorem Ipsum Test ext galore ";
+            this.ResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CreateLabel
+            // 
+            this.CreateLabel.AutoSize = true;
+            this.CreateLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.CreateLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CreateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.CreateLabel.Location = new System.Drawing.Point(3, 106);
+            this.CreateLabel.Name = "CreateLabel";
+            this.CreateLabel.Size = new System.Drawing.Size(300, 33);
+            this.CreateLabel.TabIndex = 3;
+            this.CreateLabel.Text = "+";
+            this.CreateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CreateLabel.Click += new System.EventHandler(this.Create_Click);
             // 
             // MainForm
             // 
@@ -435,12 +433,12 @@
             this.CompanyDetails.ResumeLayout(false);
             this.CompanyDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SaveWarningImage)).EndInit();
-            this.ProfileList.ResumeLayout(false);
-            this.ProfileList.PerformLayout();
-            this.TestProfile.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.ProfileList.ResumeLayout(false);
+            this.ProfileList.PerformLayout();
+            this.TestProfile.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -454,13 +452,8 @@
         private System.Windows.Forms.TableLayoutPanel BodyLayout;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox CompanyDetails;
-        private System.Windows.Forms.FlowLayoutPanel ProfileList;
-        private System.Windows.Forms.GroupBox TestProfile;
-        private System.Windows.Forms.Button SettingButton;
-        private System.Windows.Forms.Label ResultLabel;
         private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Button MinimizeButton;
-        private System.Windows.Forms.Label CreateLabel;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.TextBox SettingsTags;
         private System.Windows.Forms.TextBox SettingsName;
@@ -470,10 +463,15 @@
         private System.Windows.Forms.Label SettingsTagLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox SaveWarningImage;
-        private System.Windows.Forms.Label CompanyName;
         private System.Windows.Forms.Label SettingsHistoryLabel;
         private System.Windows.Forms.Label SettingsHistory;
         private System.Windows.Forms.Button SearchButton;
+        private System.Windows.Forms.FlowLayoutPanel ProfileList;
+        private System.Windows.Forms.GroupBox TestProfile;
+        private System.Windows.Forms.Label CompanyName;
+        private System.Windows.Forms.Button SettingButton;
+        private System.Windows.Forms.Label ResultLabel;
+        private System.Windows.Forms.Label CreateLabel;
     }
 }
 

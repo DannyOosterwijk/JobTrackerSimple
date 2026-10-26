@@ -33,6 +33,7 @@ namespace SimpleJobTracker
         private JavaScraper javaScraper = new JavaScraper();
         private ProfileManager profileManager = new ProfileManager();
         private List<Control> profileControls = new List<Control>();
+        private Emailer emailer = new Emailer();
 
         //Navigating & moving
         private int scrollLocation = 0;
@@ -174,7 +175,12 @@ namespace SimpleJobTracker
                 {
                     profileManager.AddNewResult(profile, amount);
                     UpdateSettingMenu(profile);
+
+                    
+
                 }
+
+                await emailer.SendEmailAsync("doosterwijker@gmail.com", "Job page has changed for " + profile.Name + ", now there are " + amount + " tags");
             }
             catch (Exception ex)
             {
