@@ -34,6 +34,8 @@
             this.BodyLayout = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.CompanyDetails = new System.Windows.Forms.GroupBox();
+            this.SettingsHistory = new System.Windows.Forms.Label();
+            this.SettingsHistoryLabel = new System.Windows.Forms.Label();
             this.SaveWarningImage = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SettingsTagLabel = new System.Windows.Forms.Label();
@@ -48,14 +50,12 @@
             this.CompanyName = new System.Windows.Forms.Label();
             this.SettingButton = new System.Windows.Forms.Button();
             this.ResultLabel = new System.Windows.Forms.Label();
-            this.SearchButton = new System.Windows.Forms.Button();
             this.CreateLabel = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.MinimizeButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.SettingsHistoryLabel = new System.Windows.Forms.Label();
-            this.SettingsHistory = new System.Windows.Forms.Label();
+            this.SearchButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.BodyLayout.SuspendLayout();
@@ -130,6 +130,7 @@
             // 
             // CompanyDetails
             // 
+            this.CompanyDetails.Controls.Add(this.SearchButton);
             this.CompanyDetails.Controls.Add(this.SettingsHistory);
             this.CompanyDetails.Controls.Add(this.SettingsHistoryLabel);
             this.CompanyDetails.Controls.Add(this.SaveWarningImage);
@@ -149,6 +150,24 @@
             this.CompanyDetails.TabIndex = 2;
             this.CompanyDetails.TabStop = false;
             this.CompanyDetails.Text = "groupBox2";
+            // 
+            // SettingsHistory
+            // 
+            this.SettingsHistory.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SettingsHistory.Location = new System.Drawing.Point(6, 191);
+            this.SettingsHistory.Name = "SettingsHistory";
+            this.SettingsHistory.Size = new System.Drawing.Size(405, 150);
+            this.SettingsHistory.TabIndex = 16;
+            this.SettingsHistory.Text = "History";
+            // 
+            // SettingsHistoryLabel
+            // 
+            this.SettingsHistoryLabel.AutoSize = true;
+            this.SettingsHistoryLabel.Location = new System.Drawing.Point(6, 169);
+            this.SettingsHistoryLabel.Name = "SettingsHistoryLabel";
+            this.SettingsHistoryLabel.Size = new System.Drawing.Size(39, 13);
+            this.SettingsHistoryLabel.TabIndex = 15;
+            this.SettingsHistoryLabel.Text = "History";
             // 
             // SaveWarningImage
             // 
@@ -259,7 +278,6 @@
             this.TestProfile.Controls.Add(this.CompanyName);
             this.TestProfile.Controls.Add(this.SettingButton);
             this.TestProfile.Controls.Add(this.ResultLabel);
-            this.TestProfile.Controls.Add(this.SearchButton);
             this.TestProfile.Dock = System.Windows.Forms.DockStyle.Right;
             this.TestProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.TestProfile.Location = new System.Drawing.Point(3, 3);
@@ -293,23 +311,13 @@
             // 
             // ResultLabel
             // 
-            this.ResultLabel.Location = new System.Drawing.Point(114, 64);
+            this.ResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResultLabel.Location = new System.Drawing.Point(8, 64);
             this.ResultLabel.Name = "ResultLabel";
-            this.ResultLabel.Size = new System.Drawing.Size(122, 30);
+            this.ResultLabel.Size = new System.Drawing.Size(228, 30);
             this.ResultLabel.TabIndex = 2;
-            this.ResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.SearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.SearchButton.Location = new System.Drawing.Point(8, 64);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(100, 30);
-            this.SearchButton.TabIndex = 1;
-            this.SearchButton.Text = "Search";
-            this.SearchButton.UseVisualStyleBackColor = false;
-            this.SearchButton.Click += new System.EventHandler(this.Search_Click);
+            this.ResultLabel.Text = "Tags Found: Lorem Ipsum Test ext galore ";
+            this.ResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CreateLabel
             // 
@@ -396,23 +404,17 @@
             this.label1.Text = "Simple Job Tracker";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // SettingsHistoryLabel
+            // SearchButton
             // 
-            this.SettingsHistoryLabel.AutoSize = true;
-            this.SettingsHistoryLabel.Location = new System.Drawing.Point(6, 169);
-            this.SettingsHistoryLabel.Name = "SettingsHistoryLabel";
-            this.SettingsHistoryLabel.Size = new System.Drawing.Size(39, 13);
-            this.SettingsHistoryLabel.TabIndex = 15;
-            this.SettingsHistoryLabel.Text = "History";
-            // 
-            // SettingsHistory
-            // 
-            this.SettingsHistory.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SettingsHistory.Location = new System.Drawing.Point(6, 191);
-            this.SettingsHistory.Name = "SettingsHistory";
-            this.SettingsHistory.Size = new System.Drawing.Size(405, 150);
-            this.SettingsHistory.TabIndex = 16;
-            this.SettingsHistory.Text = "History";
+            this.SearchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.SearchButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.SearchButton.Location = new System.Drawing.Point(172, 356);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(147, 30);
+            this.SearchButton.TabIndex = 17;
+            this.SearchButton.Text = "Manual Search";
+            this.SearchButton.UseVisualStyleBackColor = false;
+            this.SearchButton.Click += new System.EventHandler(this.Search_Click);
             // 
             // MainForm
             // 
@@ -456,7 +458,6 @@
         private System.Windows.Forms.GroupBox TestProfile;
         private System.Windows.Forms.Button SettingButton;
         private System.Windows.Forms.Label ResultLabel;
-        private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Button MinimizeButton;
         private System.Windows.Forms.Label CreateLabel;
@@ -472,6 +473,7 @@
         private System.Windows.Forms.Label CompanyName;
         private System.Windows.Forms.Label SettingsHistoryLabel;
         private System.Windows.Forms.Label SettingsHistory;
+        private System.Windows.Forms.Button SearchButton;
     }
 }
 

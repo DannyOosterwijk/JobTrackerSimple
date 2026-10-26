@@ -112,7 +112,10 @@ namespace SimpleJobTracker
                 if(i < existingControls)
                 {
                     ProfileList.Controls[i].Controls[0].Text = profiles[i].Name;
-                    ProfileList.Controls[i].Controls[2].Text = "";
+                    if (profiles[i].GetLastResult() != null)
+                    {
+                        ProfileList.Controls[i].Controls[2].Text = "Tags Found: " + profiles[i].GetLastResult().Amount.ToString();
+                    }
                 }
                 else
                 {
@@ -154,8 +157,8 @@ namespace SimpleJobTracker
         {
             Stopwatch sw = Stopwatch.StartNew(); //Stopwatch for speed testing
             company.Controls[2].Text = ""; //Empty search result
-            company.Controls[3].Enabled = false; //Disable search button
-            company.Controls[3].BackColor = selectedColor;
+            SearchButton.Enabled = false; //Disable search button
+            SearchButton.BackColor = selectedColor;
 
             try
             {
@@ -165,7 +168,7 @@ namespace SimpleJobTracker
                 var tagString = profile.Tags;
                 string[] companyTags = tagString.Split(' ');
                 int amount = await javaScraper.CheckWeb(profile.Link, companyTags);
-                company.Controls[2].Text = amount.ToString();
+                company.Controls[2].Text = "Tags Found: " + amount.ToString();
 
                 if (profile.History == null || profile.History[profile.History.Count - 1].Amount != amount)
                 {
@@ -175,7 +178,7 @@ namespace SimpleJobTracker
             }
             catch (Exception ex)
             {
-                ResultLabel.Text = ex.Message;
+                company.Controls[2].Text = ex.Message;
             }
             
             //Turn elapsed time into seconds
@@ -185,8 +188,8 @@ namespace SimpleJobTracker
             float timeInSeconds = roundedTime / 100f;
             Console.WriteLine("Succesfully gotten job page info, time elapsed: " + timeInSeconds);
 
-            company.Controls[3].Enabled = true; //Enable search button
-            company.Controls[3].BackColor = buttonColor;
+            SearchButton.Enabled = true; //Enable search button
+            SearchButton.BackColor = buttonColor;
 
             return true;
         }
@@ -198,11 +201,10 @@ namespace SimpleJobTracker
             var con = new System.Windows.Forms.GroupBox();
             var settingButton = new System.Windows.Forms.Button();
             var resultLabel = new System.Windows.Forms.Label();
-            var searchButton = new System.Windows.Forms.Button();
             var companyName = new System.Windows.Forms.Label();
 
 
-            // CREATING BUTTON
+            // CREATING SETTINGS BUTTON
             settingButton.BackColor = SettingButton.BackColor;
             settingButton.ForeColor = SettingButton.ForeColor;
             settingButton.Location = SettingButton.Location;
@@ -213,23 +215,13 @@ namespace SimpleJobTracker
             settingButton.UseVisualStyleBackColor = SettingButton.UseVisualStyleBackColor;
             settingButton.Click += new System.EventHandler(this.ProfileSetting_Click);
 
-            // CREATING LABEL
+            // CREATING RESULT LABEL
             resultLabel.Location = ResultLabel.Location;
             resultLabel.Name = "ResultLabel " + profile.Id;
-            resultLabel.Size = SettingButton.Size;
-            resultLabel.TabIndex = SettingButton.TabIndex;
-            resultLabel.TextAlign = SettingButton.TextAlign;
-
-            // CREATING SETTING BUTTON
-            searchButton.BackColor = SearchButton.BackColor;
-            searchButton.ForeColor = SearchButton.ForeColor;
-            searchButton.Location = SearchButton.Location;
-            searchButton.Name = "SearchButton " + profile.Id;
-            searchButton.Size = SearchButton.Size;
-            searchButton.TabIndex = SearchButton.TabIndex;
-            searchButton.Text = "Search";
-            searchButton.UseVisualStyleBackColor = SearchButton.UseVisualStyleBackColor;
-            searchButton.Click += new System.EventHandler(this.Search_Click);
+            resultLabel.Size = ResultLabel.Size;
+            resultLabel.TabIndex = ResultLabel.TabIndex;
+            resultLabel.TextAlign = ResultLabel.TextAlign;
+            resultLabel.Font = ResultLabel.Font;
 
             // CREATING NAME LABEL
             companyName.Dock = CompanyName.Dock;
@@ -244,7 +236,6 @@ namespace SimpleJobTracker
             con.Controls.Add(companyName);
             con.Controls.Add(settingButton);
             con.Controls.Add(resultLabel);
-            con.Controls.Add(searchButton);
             con.Dock = TestProfile.Dock;
             con.ForeColor = TestProfile.ForeColor;
             con.Location = TestProfile.Location;
@@ -262,6 +253,7 @@ namespace SimpleJobTracker
         ///
 
         //open the setting menu for clicked profile
+        //TODO: let user open settings by clicking profile and let user drag profile to change order
         private void ProfileSetting_Click(object sender, EventArgs e)
         {
             CompanyDetails.Show();
@@ -307,8 +299,7 @@ namespace SimpleJobTracker
         //Search individual job page
         private void Search_Click(object sender, EventArgs e)
         {
-            var clickedButton = sender as Control;
-            var companyHeader = clickedButton.Parent as GroupBox;
+            var companyHeader = selectedProfile as GroupBox;
             searchWeb(companyHeader);
         }
 

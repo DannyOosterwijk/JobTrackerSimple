@@ -50,6 +50,7 @@ namespace SimpleJobTracker.Services
             catch (Exception ex)
             {
                 Console.WriteLine("ERROR: could not serialize to json or write to file");
+                throw new Exception(ex.Message);
             }
         }
 
@@ -72,6 +73,7 @@ namespace SimpleJobTracker.Services
             catch (Exception ex)
             {
                 Console.WriteLine("ERROR: could not deserialize from json or read file");
+                throw new Exception(ex.Message);
             }
             
         }
@@ -130,6 +132,7 @@ namespace SimpleJobTracker.Services
             catch (Exception ex)
             {
                 Console.WriteLine("ERROR: could not delete job profile");
+                throw new Exception(ex.Message);
             }
         }
 
@@ -148,6 +151,7 @@ namespace SimpleJobTracker.Services
             catch (Exception ex)
             {
                 Console.WriteLine("ERROR: could not add date to history");
+                throw new Exception(ex.Message);
             }
         }
 
