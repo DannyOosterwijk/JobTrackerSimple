@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -64,6 +65,31 @@ namespace SimpleJobTracker
             ProfileList.AutoScrollPosition = new Point(0, 0);
             UpdateScrollSettings();
             this.MouseWheel += ProfileListScroll;
+
+            //TODO:turn into function
+            try
+            {
+                string fileName = "EmailSettings.txt";
+                var dirInfo = System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + "/Saves");
+                string path = Path.Combine(Environment.CurrentDirectory + "/Saves", fileName);
+
+                string fileContent = null;
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    fileContent = sr.ReadToEnd();
+                }
+
+                var deserializedSettings = Newtonsoft.Json.JsonConvert.DeserializeObject<EmailSettings>(fileContent);
+                EmailSettings settings = deserializedSettings != null ? deserializedSettings : new EmailSettings();
+
+                EmailSettingsAdress.Text = settings.Adress;
+                EmailSettingsBubbleBox.Checked = settings.BubbleChecked;
+                EmailSettingsSendBox.Checked = settings.SendChecked;
+            }
+            catch
+            {
+                Console.WriteLine("WARNING: Email settings save file does not exist");
+            }
         }
 
         //Initialize the icon in the notificiation tray
@@ -179,8 +205,10 @@ namespace SimpleJobTracker
                     
 
                 }
-
-                await emailer.SendEmailAsync("doosterwijker@gmail.com", "Job page has changed for " + profile.Name + ", now there are " + amount + " tags");
+                if (EmailSettingsSendBox.Checked)
+                {
+                    await emailer.SendEmailAsync(EmailSettingsAdress.Text, "Job page has changed for " + profile.Name + ", now there are " + amount + " tags");
+                }
             }
             catch (Exception ex)
             {
@@ -329,12 +357,7 @@ namespace SimpleJobTracker
         //
         private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.ShowInTaskbar = true;
-                notifyIcon.Visible = false;
-            }
+
         }
 
         //Start grabbing the window
@@ -429,6 +452,30 @@ namespace SimpleJobTracker
                     SaveWarningImage.Hide();
                 }
             }
+        }
+
+        private void EmailSettings_ValueChanged(object sender, EventArgs e)
+        {
+            //TODO: turn into service class
+            try
+            {
+                string fileName = "EmailSettings.txt";
+                var dirInfo = System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + "/Saves");
+                string path = Path.Combine(Environment.CurrentDirectory + "/Saves", fileName);
+
+                var settings = new EmailSettings() { Adress = EmailSettingsAdress.Text, BubbleChecked = EmailSettingsBubbleBox.Checked, SendChecked = EmailSettingsSendBox.Checked };
+                var serializedObject = Newtonsoft.Json.JsonConvert.SerializeObject(settings, Newtonsoft.Json.Formatting.Indented);//serialize profiles
+
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    sw.Write(serializedObject);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("ERROR: Could not write to email settings save file");
+            }
+            
         }
     }
 }

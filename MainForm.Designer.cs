@@ -50,12 +50,21 @@
             this.MinimizeButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.ProfileList = new System.Windows.Forms.FlowLayoutPanel();
             this.TestProfile = new System.Windows.Forms.GroupBox();
             this.CompanyName = new System.Windows.Forms.Label();
             this.SettingButton = new System.Windows.Forms.Button();
             this.ResultLabel = new System.Windows.Forms.Label();
             this.CreateLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.EmailSettingsLabel = new System.Windows.Forms.Label();
+            this.EmailSettingsSendLabel = new System.Windows.Forms.Label();
+            this.EmailSettingsAdress = new System.Windows.Forms.TextBox();
+            this.EmailSettingsSendBox = new System.Windows.Forms.CheckBox();
+            this.EmailSettingsBubbleLabel = new System.Windows.Forms.Label();
+            this.EmailSettingsBubbleBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.BodyLayout.SuspendLayout();
@@ -64,8 +73,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.ProfileList.SuspendLayout();
             this.TestProfile.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -102,9 +113,9 @@
             this.BodyLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.40404F));
             this.BodyLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.BodyLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.59596F));
-            this.BodyLayout.Controls.Add(this.ProfileList, 0, 0);
             this.BodyLayout.Controls.Add(this.label2, 1, 0);
             this.BodyLayout.Controls.Add(this.CompanyDetails, 2, 0);
+            this.BodyLayout.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.BodyLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BodyLayout.Location = new System.Drawing.Point(0, 0);
             this.BodyLayout.Name = "BodyLayout";
@@ -341,6 +352,24 @@
             this.label1.Text = "Simple Job Tracker";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.groupBox1, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.ProfileList, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(316, 398);
+            this.tableLayoutPanel2.TabIndex = 3;
+            // 
             // ProfileList
             // 
             this.ProfileList.Controls.Add(this.TestProfile);
@@ -349,8 +378,8 @@
             this.ProfileList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.ProfileList.Location = new System.Drawing.Point(3, 3);
             this.ProfileList.Name = "ProfileList";
-            this.ProfileList.Size = new System.Drawing.Size(310, 392);
-            this.ProfileList.TabIndex = 5;
+            this.ProfileList.Size = new System.Drawing.Size(310, 288);
+            this.ProfileList.TabIndex = 6;
             this.ProfileList.WrapContents = false;
             // 
             // TestProfile
@@ -396,7 +425,7 @@
             this.ResultLabel.Name = "ResultLabel";
             this.ResultLabel.Size = new System.Drawing.Size(228, 30);
             this.ResultLabel.TabIndex = 2;
-            this.ResultLabel.Text = "Tags Found: Lorem Ipsum Test ext galore ";
+            this.ResultLabel.Text = "Tags Found: Test";
             this.ResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CreateLabel
@@ -413,6 +442,97 @@
             this.CreateLabel.Text = "+";
             this.CreateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.CreateLabel.Click += new System.EventHandler(this.Create_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(0, 294);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(316, 5);
+            this.label3.TabIndex = 7;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.EmailSettingsBubbleBox);
+            this.groupBox1.Controls.Add(this.EmailSettingsBubbleLabel);
+            this.groupBox1.Controls.Add(this.EmailSettingsSendBox);
+            this.groupBox1.Controls.Add(this.EmailSettingsAdress);
+            this.groupBox1.Controls.Add(this.EmailSettingsLabel);
+            this.groupBox1.Controls.Add(this.EmailSettingsSendLabel);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.groupBox1.Location = new System.Drawing.Point(3, 302);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 3);
+            this.groupBox1.Size = new System.Drawing.Size(310, 93);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            // 
+            // EmailSettingsLabel
+            // 
+            this.EmailSettingsLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.EmailSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailSettingsLabel.Location = new System.Drawing.Point(5, 18);
+            this.EmailSettingsLabel.Name = "EmailSettingsLabel";
+            this.EmailSettingsLabel.Size = new System.Drawing.Size(300, 20);
+            this.EmailSettingsLabel.TabIndex = 10;
+            this.EmailSettingsLabel.Text = "Email";
+            // 
+            // EmailSettingsSendLabel
+            // 
+            this.EmailSettingsSendLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailSettingsSendLabel.Location = new System.Drawing.Point(8, 57);
+            this.EmailSettingsSendLabel.Name = "EmailSettingsSendLabel";
+            this.EmailSettingsSendLabel.Size = new System.Drawing.Size(96, 30);
+            this.EmailSettingsSendLabel.TabIndex = 2;
+            this.EmailSettingsSendLabel.Text = "Send Email:";
+            this.EmailSettingsSendLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // EmailSettingsAdress
+            // 
+            this.EmailSettingsAdress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.EmailSettingsAdress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.EmailSettingsAdress.Location = new System.Drawing.Point(8, 38);
+            this.EmailSettingsAdress.Name = "EmailSettingsAdress";
+            this.EmailSettingsAdress.Size = new System.Drawing.Size(283, 20);
+            this.EmailSettingsAdress.TabIndex = 11;
+            this.EmailSettingsAdress.TextChanged += new System.EventHandler(this.EmailSettings_ValueChanged);
+            // 
+            // EmailSettingsSendBox
+            // 
+            this.EmailSettingsSendBox.AutoSize = true;
+            this.EmailSettingsSendBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.EmailSettingsSendBox.Location = new System.Drawing.Point(99, 66);
+            this.EmailSettingsSendBox.Name = "EmailSettingsSendBox";
+            this.EmailSettingsSendBox.Size = new System.Drawing.Size(15, 14);
+            this.EmailSettingsSendBox.TabIndex = 12;
+            this.EmailSettingsSendBox.UseVisualStyleBackColor = true;
+            this.EmailSettingsSendBox.TextChanged += new System.EventHandler(this.EmailSettings_ValueChanged);
+            this.EmailSettingsSendBox.Click += new System.EventHandler(this.EmailSettings_ValueChanged);
+            // 
+            // EmailSettingsBubbleLabel
+            // 
+            this.EmailSettingsBubbleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailSettingsBubbleLabel.Location = new System.Drawing.Point(131, 57);
+            this.EmailSettingsBubbleLabel.Name = "EmailSettingsBubbleLabel";
+            this.EmailSettingsBubbleLabel.Size = new System.Drawing.Size(131, 30);
+            this.EmailSettingsBubbleLabel.TabIndex = 13;
+            this.EmailSettingsBubbleLabel.Text = "Notification Bubble:";
+            this.EmailSettingsBubbleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // EmailSettingsBubbleBox
+            // 
+            this.EmailSettingsBubbleBox.AutoSize = true;
+            this.EmailSettingsBubbleBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.EmailSettingsBubbleBox.Location = new System.Drawing.Point(268, 66);
+            this.EmailSettingsBubbleBox.Name = "EmailSettingsBubbleBox";
+            this.EmailSettingsBubbleBox.Size = new System.Drawing.Size(15, 14);
+            this.EmailSettingsBubbleBox.TabIndex = 14;
+            this.EmailSettingsBubbleBox.UseVisualStyleBackColor = true;
+            this.EmailSettingsBubbleBox.Click += new System.EventHandler(this.EmailSettings_ValueChanged);
             // 
             // MainForm
             // 
@@ -436,9 +556,13 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ProfileList.ResumeLayout(false);
             this.ProfileList.PerformLayout();
             this.TestProfile.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -466,12 +590,21 @@
         private System.Windows.Forms.Label SettingsHistoryLabel;
         private System.Windows.Forms.Label SettingsHistory;
         private System.Windows.Forms.Button SearchButton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label EmailSettingsLabel;
+        private System.Windows.Forms.Label EmailSettingsSendLabel;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.FlowLayoutPanel ProfileList;
         private System.Windows.Forms.GroupBox TestProfile;
         private System.Windows.Forms.Label CompanyName;
         private System.Windows.Forms.Button SettingButton;
         private System.Windows.Forms.Label ResultLabel;
         private System.Windows.Forms.Label CreateLabel;
+        private System.Windows.Forms.CheckBox EmailSettingsSendBox;
+        private System.Windows.Forms.TextBox EmailSettingsAdress;
+        private System.Windows.Forms.CheckBox EmailSettingsBubbleBox;
+        private System.Windows.Forms.Label EmailSettingsBubbleLabel;
     }
 }
 

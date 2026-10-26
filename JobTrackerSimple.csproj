@@ -104,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\EmailSettings.cs" />
     <Compile Include="Models\JobProfile.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Services\Emailer.cs" />
