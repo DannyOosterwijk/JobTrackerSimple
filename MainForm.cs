@@ -65,6 +65,8 @@ namespace SimpleJobTracker
 
             CompanyDetails.Hide();
 
+            CreateLabel.MinimumSize = new Size(ProfileList.Width - ProfileList.Margin.Left - ProfileList.Margin.Right, CreateLabel.Height);
+
             InitializeIconContext();
             UpdateProfileList();
 
@@ -220,16 +222,16 @@ namespace SimpleJobTracker
                     if (jobs[i].History.Count > 1) {
                         if(jobs[i].History[jobs[i].History.Count - 1].Amount > jobs[i].History[jobs[i].History.Count - 2].Amount)
                         {
-                            increasedJobs += jobs[i].Name + " - Increased From " + jobs[i].History[jobs[i].History.Count - 2].Amount.ToString() + " To " + jobs[i].History[jobs[i].History.Count - 1].Amount.ToString() + "\n";
+                            increasedJobs += jobs[i].Name + " - increased from " + jobs[i].History[jobs[i].History.Count - 2].Amount.ToString() + " to " + jobs[i].History[jobs[i].History.Count - 1].Amount.ToString() + "\n";
                         }
                         else
                         {
-                            decreasedJobs += jobs[i].Name + " - Decreased From " + jobs[i].History[jobs[i].History.Count - 2].Amount + " To " + jobs[i].History[jobs[i].History.Count - 1].Amount + "\n";
+                            decreasedJobs += jobs[i].Name + " - decreased from " + jobs[i].History[jobs[i].History.Count - 2].Amount + " to " + jobs[i].History[jobs[i].History.Count - 1].Amount + "\n";
                         }
                     }
                     else
                     {
-                        increasedJobs += jobs[i].Name + " - Increased From 0 To " + jobs[i].History[0].Amount.ToString() + "\n";
+                        increasedJobs += jobs[i].Name + " - increased from 0 to " + jobs[i].History[0].Amount.ToString() + "\n";
                     }
                 }
             }
