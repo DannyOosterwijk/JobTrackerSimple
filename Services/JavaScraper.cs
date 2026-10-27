@@ -53,6 +53,8 @@ namespace SimpleJobTracker.Services
         //Goes to the website and returns the amount of texts that contain at least one of the tags
         public async Task<int> CheckWeb(string url, string[] tags)
         {
+            Console.WriteLine($"Check Web: {url}");
+
             int amount = 0; //amount text that contain a tag
             try
             {
@@ -72,10 +74,19 @@ namespace SimpleJobTracker.Services
 
                     //Get path and filename for debug file
                     string fileName = "DebugPage.txt";
-                    var dirInfo = System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + "/Saves");
-                    string path = Path.Combine(Environment.CurrentDirectory + "/Saves", fileName);
+                    string path = Path.Combine(Environment.CurrentDirectory + "/Saves");
 
-                    File.WriteAllText(path, debugString);//create a debug file to more easily read html data
+                    //create a debug file to more easily read html data
+                    //TODO: turn all file writing and reading into a service class
+                    if (!string.IsNullOrEmpty(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    using (StreamWriter sw = new StreamWriter(path + fileName))
+                    {
+                        sw.Write(debugString);
+                    }
                 }
                 else
                 {
@@ -88,6 +99,7 @@ namespace SimpleJobTracker.Services
                 throw new Exception(ex.Message);
             }
 
+            Console.WriteLine("Succefully scrapped web");
             return amount;
         }
 

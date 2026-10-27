@@ -42,6 +42,12 @@ namespace SimpleJobTracker.Services
                 
                 //Write save data to file
                 string path = Path.Combine(saveFolder + saveFileName);
+
+                if (!string.IsNullOrEmpty(saveFolder))
+                {
+                    Directory.CreateDirectory(saveFolder);
+                }
+
                 using (StreamWriter sw = new StreamWriter(path))
                 {
                     sw.Write(serializedObject);
@@ -62,6 +68,9 @@ namespace SimpleJobTracker.Services
                 //Get save data from file
                 string path = Path.Combine(saveFolder + saveFileName);
                 string fileContent = null;
+
+                if(!File.Exists(path)) SaveJobProfiles(); //create empty save file if save file does not exist
+
                 using (StreamReader sr = new StreamReader(path))
                 {
                     fileContent = sr.ReadToEnd();
@@ -69,6 +78,7 @@ namespace SimpleJobTracker.Services
 
                 var deserializedJobs = Newtonsoft.Json.JsonConvert.DeserializeObject<List<JobProfile>>(fileContent);//deserialize profiles
                 jobs = deserializedJobs != null ? deserializedJobs : new List<JobProfile>();//Make list empty if save file is empty
+                
             }
             catch (Exception ex)
             {

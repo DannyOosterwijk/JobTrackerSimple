@@ -30,6 +30,12 @@ namespace SimpleJobTracker
             int nHeightEllipse // height of ellipse
         );
 
+#if DEBUG
+        private bool inDebug = true;
+#else
+        private bool inDebug = false;
+#endif
+
         //Web scrapping
         private JavaScraper javaScraper = new JavaScraper();
         private ProfileManager profileManager = new ProfileManager();
@@ -86,14 +92,22 @@ namespace SimpleJobTracker
                 EmailSettingsAdress.Text = settings.Adress;
                 EmailSettingsBubbleBox.Checked = settings.BubbleChecked;
                 EmailSettingsSendBox.Checked = settings.SendChecked;
-
-                EmailSettingsBubbleBox.Click += new System.EventHandler(EmailSettings_ValueChanged);
-                EmailSettingsSendBox.Click += new System.EventHandler(EmailSettings_ValueChanged);
-                EmailSettingsAdress.TextChanged += new System.EventHandler(EmailSettings_ValueChanged);
             }
             catch
             {
                 Console.WriteLine("WARNING: Email settings save file does not exist");
+            }
+
+            EmailSettingsBubbleBox.Click += new System.EventHandler(EmailSettings_ValueChanged);
+            EmailSettingsSendBox.Click += new System.EventHandler(EmailSettings_ValueChanged);
+            EmailSettingsAdress.TextChanged += new System.EventHandler(EmailSettings_ValueChanged);
+
+            if (!inDebug)
+            {
+                this.WindowState = FormWindowState.Minimized;
+                this.ShowInTaskbar = false;
+                notifyIcon.Visible = true;
+
             }
 
             SearchAllProfiles(); //make sure this is called only after everything is initialized
@@ -222,19 +236,19 @@ namespace SimpleJobTracker
 
             if (changeFound)
             {
+                if (increasedJobs != "")
+                {
+                    mailBody += "Jobs that have been increased: \n";
+                    mailBody += increasedJobs;
+                }
+                if (decreasedJobs != "")
+                {
+                    mailBody += "Jobs that have been decreased: \n";
+                    mailBody += decreasedJobs;
+                }
+
                 if (EmailSettingsSendBox.Checked)
                 {
-                    if (increasedJobs != "")
-                    {
-                        mailBody += "Jobs that have been increased: \n";
-                        mailBody += increasedJobs;
-                    }
-                    if (decreasedJobs != "")
-                    {
-                        mailBody += "Jobs that have been decreased: \n";
-                        mailBody += decreasedJobs;
-                    }
-
                     await emailer.SendEmailAsync(EmailSettingsAdress.Text, mailHeader + mailBody);
                 }
                 if (EmailSettingsBubbleBox.Checked)
@@ -249,6 +263,8 @@ namespace SimpleJobTracker
         //Try to search the web and retrieve the amount of instances of the profiles tags
         private async Task<bool> searchWeb(JobProfile profile)
         {
+            Console.WriteLine("Searching page for: " + profile.Name);
+
             Stopwatch sw = Stopwatch.StartNew(); //Stopwatch for speed testing
             ProfileList.Controls[profile.Id].Controls[2].Text = ""; //Empty search result
             SearchButton.Enabled = false; //Disable search button
@@ -267,7 +283,7 @@ namespace SimpleJobTracker
                     int amount = await javaScraper.CheckWeb(profile.Link, companyTags);
                     ProfileList.Controls[profile.Id].Controls[2].Text = "Tags Found: " + amount.ToString();
 
-                    if (profile.History == null || profile.History[profile.History.Count - 1].Amount != amount)
+                    if (profile.History == null || profile.History.Count == 0 || profile.History[profile.History.Count - 1].Amount != amount)
                     {
                         profileManager.AddNewResult(profile, amount);
                         UpdateSettingMenu(profile);
@@ -278,8 +294,6 @@ namespace SimpleJobTracker
             catch (Exception ex)
             {
                 ProfileList.Controls[profile.Id].Controls[2].Text = ex.Message;
-                sw.Stop();
-                //return false;
             }
             
             //Turn elapsed time into seconds
@@ -292,6 +306,7 @@ namespace SimpleJobTracker
             SearchButton.Enabled = true; //Enable search button
             SearchButton.BackColor = buttonColor;
 
+            Console.WriteLine("Succesfully searched page");
             return resultChanged;
         }
 
@@ -411,9 +426,10 @@ namespace SimpleJobTracker
             Application.Exit();
         }
 
-        //Exit application
+        //Move application to notification tray
         private void Minimize_Clicked(object sender, EventArgs e)
         {
+            //TODO: Turn into function
             if (this.WindowState != FormWindowState.Minimized)
             {
                 this.WindowState = FormWindowState.Minimized;
@@ -422,9 +438,10 @@ namespace SimpleJobTracker
             }
         }
 
-        //
+        //Open application from notification tray
         private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
+            //TODO: Turn into function
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.WindowState = FormWindowState.Normal;
@@ -533,8 +550,12 @@ namespace SimpleJobTracker
             try
             {
                 string fileName = "EmailSettings.txt";
-                var dirInfo = System.IO.Directory.CreateDirectory(Environment.CurrentDirectory + "/Saves");
                 string path = Path.Combine(Environment.CurrentDirectory + "/Saves", fileName);
+
+                if (!string.IsNullOrEmpty(Environment.CurrentDirectory + "/Saves"))
+                {
+                    Directory.CreateDirectory(Environment.CurrentDirectory + "/Saves");
+                }
 
                 var settings = new EmailSettings() { Adress = EmailSettingsAdress.Text, BubbleChecked = EmailSettingsBubbleBox.Checked, SendChecked = EmailSettingsSendBox.Checked };
                 var serializedObject = Newtonsoft.Json.JsonConvert.SerializeObject(settings, Newtonsoft.Json.Formatting.Indented);//serialize profiles
@@ -543,6 +564,8 @@ namespace SimpleJobTracker
                 {
                     sw.Write(serializedObject);
                 }
+
+                Console.WriteLine("Succesfully saved email settings");
             }
             catch
             {
