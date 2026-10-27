@@ -48,6 +48,7 @@ namespace SimpleJobTracker
 
         //Notification tray
         private NotifyIcon notifyIcon;
+        private int bubbleDuration = 5;
 
         public MainForm()
         {
@@ -190,8 +191,8 @@ namespace SimpleJobTracker
             var jobs = profileManager.GetjobProfiles();
             bool changeFound = false;
 
-            string mailMessage = "";
-            mailMessage += "Job tracker has detected changes in the following websites: \n\n";
+            string mailBody = "";
+            string mailHeader = "Job tracker has detected changes in the following websites: \n\n";
 
             string increasedJobs = "";
             string decreasedJobs = "";
@@ -219,20 +220,29 @@ namespace SimpleJobTracker
                 }
             }
 
-            if (EmailSettingsSendBox.Checked && changeFound)
+            if (changeFound)
             {
-                if (increasedJobs != "") 
+                if (EmailSettingsSendBox.Checked)
                 {
-                    mailMessage += "Jobs that have been increased: \n";
-                    mailMessage += increasedJobs;
+                    if (increasedJobs != "")
+                    {
+                        mailBody += "Jobs that have been increased: \n";
+                        mailBody += increasedJobs;
+                    }
+                    if (decreasedJobs != "")
+                    {
+                        mailBody += "Jobs that have been decreased: \n";
+                        mailBody += decreasedJobs;
+                    }
+
+                    await emailer.SendEmailAsync(EmailSettingsAdress.Text, mailHeader + mailBody);
                 }
-                if(decreasedJobs != "")
+                if (EmailSettingsBubbleBox.Checked)
                 {
-                    mailMessage += "Jobs that have been decreased: \n";
-                    mailMessage += decreasedJobs;
+                    notifyIcon.BalloonTipTitle = mailHeader;
+                    notifyIcon.BalloonTipText = mailBody;
+                    notifyIcon.ShowBalloonTip(bubbleDuration);
                 }
-                
-                await emailer.SendEmailAsync(EmailSettingsAdress.Text, mailMessage);
             }
         }
 
