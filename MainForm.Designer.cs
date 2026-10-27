@@ -46,37 +46,37 @@
             this.SettingsTags = new System.Windows.Forms.TextBox();
             this.SettingsName = new System.Windows.Forms.TextBox();
             this.DeleteButton = new System.Windows.Forms.Button();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.MinimizeButton = new System.Windows.Forms.Button();
-            this.ExitButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.EmailSettingsBubbleBox = new System.Windows.Forms.CheckBox();
+            this.EmailSettingsBubbleLabel = new System.Windows.Forms.Label();
+            this.EmailSettingsSendBox = new System.Windows.Forms.CheckBox();
+            this.EmailSettingsAdress = new System.Windows.Forms.TextBox();
+            this.EmailSettingsLabel = new System.Windows.Forms.Label();
+            this.EmailSettingsSendLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.ProfileList = new System.Windows.Forms.FlowLayoutPanel();
             this.TestProfile = new System.Windows.Forms.GroupBox();
             this.CompanyName = new System.Windows.Forms.Label();
             this.SettingButton = new System.Windows.Forms.Button();
             this.ResultLabel = new System.Windows.Forms.Label();
             this.CreateLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.EmailSettingsLabel = new System.Windows.Forms.Label();
-            this.EmailSettingsSendLabel = new System.Windows.Forms.Label();
-            this.EmailSettingsAdress = new System.Windows.Forms.TextBox();
-            this.EmailSettingsSendBox = new System.Windows.Forms.CheckBox();
-            this.EmailSettingsBubbleLabel = new System.Windows.Forms.Label();
-            this.EmailSettingsBubbleBox = new System.Windows.Forms.CheckBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.MinimizeButton = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.BodyLayout.SuspendLayout();
             this.CompanyDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SaveWarningImage)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.ProfileList.SuspendLayout();
+            this.TestProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.ProfileList.SuspendLayout();
-            this.TestProfile.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -284,74 +284,6 @@
             this.DeleteButton.UseVisualStyleBackColor = false;
             this.DeleteButton.Click += new System.EventHandler(this.Delete_Click);
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.BackgroundImage = global::SimpleJobTracker.Properties.Resources.LogoSJT;
-            this.splitContainer1.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.MinimizeButton);
-            this.splitContainer1.Panel2.Controls.Add(this.ExitButton);
-            this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
-            this.splitContainer1.Panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Header_MouseMove);
-            this.splitContainer1.Panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Header_MouseUp);
-            this.splitContainer1.Size = new System.Drawing.Size(788, 34);
-            this.splitContainer1.TabIndex = 3;
-            // 
-            // MinimizeButton
-            // 
-            this.MinimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
-            this.MinimizeButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MinimizeButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.MinimizeButton.FlatAppearance.BorderSize = 2;
-            this.MinimizeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.MinimizeButton.Location = new System.Drawing.Point(666, 0);
-            this.MinimizeButton.Name = "MinimizeButton";
-            this.MinimizeButton.Size = new System.Drawing.Size(34, 34);
-            this.MinimizeButton.TabIndex = 2;
-            this.MinimizeButton.Text = "-";
-            this.MinimizeButton.UseVisualStyleBackColor = false;
-            this.MinimizeButton.Click += new System.EventHandler(this.Minimize_Clicked);
-            // 
-            // ExitButton
-            // 
-            this.ExitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
-            this.ExitButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.ExitButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.ExitButton.FlatAppearance.BorderSize = 2;
-            this.ExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.ExitButton.Location = new System.Drawing.Point(700, 0);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(34, 34);
-            this.ExitButton.TabIndex = 1;
-            this.ExitButton.Text = "X";
-            this.ExitButton.UseVisualStyleBackColor = false;
-            this.ExitButton.Click += new System.EventHandler(this.Exit_Clicked);
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(200, 34);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Simple Job Tracker";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -369,6 +301,93 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(316, 398);
             this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.EmailSettingsBubbleBox);
+            this.groupBox1.Controls.Add(this.EmailSettingsBubbleLabel);
+            this.groupBox1.Controls.Add(this.EmailSettingsSendBox);
+            this.groupBox1.Controls.Add(this.EmailSettingsAdress);
+            this.groupBox1.Controls.Add(this.EmailSettingsLabel);
+            this.groupBox1.Controls.Add(this.EmailSettingsSendLabel);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.groupBox1.Location = new System.Drawing.Point(3, 302);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 3);
+            this.groupBox1.Size = new System.Drawing.Size(310, 93);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            // 
+            // EmailSettingsBubbleBox
+            // 
+            this.EmailSettingsBubbleBox.AutoSize = true;
+            this.EmailSettingsBubbleBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.EmailSettingsBubbleBox.Location = new System.Drawing.Point(268, 66);
+            this.EmailSettingsBubbleBox.Name = "EmailSettingsBubbleBox";
+            this.EmailSettingsBubbleBox.Size = new System.Drawing.Size(15, 14);
+            this.EmailSettingsBubbleBox.TabIndex = 14;
+            this.EmailSettingsBubbleBox.UseVisualStyleBackColor = true;
+            // 
+            // EmailSettingsBubbleLabel
+            // 
+            this.EmailSettingsBubbleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailSettingsBubbleLabel.Location = new System.Drawing.Point(131, 57);
+            this.EmailSettingsBubbleLabel.Name = "EmailSettingsBubbleLabel";
+            this.EmailSettingsBubbleLabel.Size = new System.Drawing.Size(131, 30);
+            this.EmailSettingsBubbleLabel.TabIndex = 13;
+            this.EmailSettingsBubbleLabel.Text = "Notification Bubble:";
+            this.EmailSettingsBubbleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // EmailSettingsSendBox
+            // 
+            this.EmailSettingsSendBox.AutoSize = true;
+            this.EmailSettingsSendBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.EmailSettingsSendBox.Location = new System.Drawing.Point(99, 66);
+            this.EmailSettingsSendBox.Name = "EmailSettingsSendBox";
+            this.EmailSettingsSendBox.Size = new System.Drawing.Size(15, 14);
+            this.EmailSettingsSendBox.TabIndex = 12;
+            this.EmailSettingsSendBox.UseVisualStyleBackColor = true;
+            // 
+            // EmailSettingsAdress
+            // 
+            this.EmailSettingsAdress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.EmailSettingsAdress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.EmailSettingsAdress.Location = new System.Drawing.Point(8, 38);
+            this.EmailSettingsAdress.Name = "EmailSettingsAdress";
+            this.EmailSettingsAdress.Size = new System.Drawing.Size(283, 20);
+            this.EmailSettingsAdress.TabIndex = 11;
+            // 
+            // EmailSettingsLabel
+            // 
+            this.EmailSettingsLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.EmailSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailSettingsLabel.Location = new System.Drawing.Point(5, 18);
+            this.EmailSettingsLabel.Name = "EmailSettingsLabel";
+            this.EmailSettingsLabel.Size = new System.Drawing.Size(300, 20);
+            this.EmailSettingsLabel.TabIndex = 10;
+            this.EmailSettingsLabel.Text = "Email";
+            // 
+            // EmailSettingsSendLabel
+            // 
+            this.EmailSettingsSendLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailSettingsSendLabel.Location = new System.Drawing.Point(8, 57);
+            this.EmailSettingsSendLabel.Name = "EmailSettingsSendLabel";
+            this.EmailSettingsSendLabel.Size = new System.Drawing.Size(96, 30);
+            this.EmailSettingsSendLabel.TabIndex = 2;
+            this.EmailSettingsSendLabel.Text = "Send Email:";
+            this.EmailSettingsSendLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(0, 294);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(316, 5);
+            this.label3.TabIndex = 7;
             // 
             // ProfileList
             // 
@@ -443,96 +462,73 @@
             this.CreateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.CreateLabel.Click += new System.EventHandler(this.Create_Click);
             // 
-            // label3
+            // splitContainer1
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(0, 294);
-            this.label3.Margin = new System.Windows.Forms.Padding(0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(316, 5);
-            this.label3.TabIndex = 7;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Name = "splitContainer1";
             // 
-            // groupBox1
+            // splitContainer1.Panel1
             // 
-            this.groupBox1.Controls.Add(this.EmailSettingsBubbleBox);
-            this.groupBox1.Controls.Add(this.EmailSettingsBubbleLabel);
-            this.groupBox1.Controls.Add(this.EmailSettingsSendBox);
-            this.groupBox1.Controls.Add(this.EmailSettingsAdress);
-            this.groupBox1.Controls.Add(this.EmailSettingsLabel);
-            this.groupBox1.Controls.Add(this.EmailSettingsSendLabel);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.groupBox1.Location = new System.Drawing.Point(3, 302);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 3);
-            this.groupBox1.Size = new System.Drawing.Size(310, 93);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
+            this.splitContainer1.Panel1.BackgroundImage = global::SimpleJobTracker.Properties.Resources.LogoSJT;
+            this.splitContainer1.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             // 
-            // EmailSettingsLabel
+            // splitContainer1.Panel2
             // 
-            this.EmailSettingsLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.EmailSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmailSettingsLabel.Location = new System.Drawing.Point(5, 18);
-            this.EmailSettingsLabel.Name = "EmailSettingsLabel";
-            this.EmailSettingsLabel.Size = new System.Drawing.Size(300, 20);
-            this.EmailSettingsLabel.TabIndex = 10;
-            this.EmailSettingsLabel.Text = "Email";
+            this.splitContainer1.Panel2.Controls.Add(this.MinimizeButton);
+            this.splitContainer1.Panel2.Controls.Add(this.ExitButton);
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Header_MouseDown);
+            this.splitContainer1.Panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Header_MouseMove);
+            this.splitContainer1.Panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Header_MouseUp);
+            this.splitContainer1.Size = new System.Drawing.Size(788, 34);
+            this.splitContainer1.TabIndex = 3;
             // 
-            // EmailSettingsSendLabel
+            // MinimizeButton
             // 
-            this.EmailSettingsSendLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmailSettingsSendLabel.Location = new System.Drawing.Point(8, 57);
-            this.EmailSettingsSendLabel.Name = "EmailSettingsSendLabel";
-            this.EmailSettingsSendLabel.Size = new System.Drawing.Size(96, 30);
-            this.EmailSettingsSendLabel.TabIndex = 2;
-            this.EmailSettingsSendLabel.Text = "Send Email:";
-            this.EmailSettingsSendLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.MinimizeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
+            this.MinimizeButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MinimizeButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.MinimizeButton.FlatAppearance.BorderSize = 2;
+            this.MinimizeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinimizeButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.MinimizeButton.Location = new System.Drawing.Point(666, 0);
+            this.MinimizeButton.Name = "MinimizeButton";
+            this.MinimizeButton.Size = new System.Drawing.Size(34, 34);
+            this.MinimizeButton.TabIndex = 2;
+            this.MinimizeButton.Text = "-";
+            this.MinimizeButton.UseVisualStyleBackColor = false;
+            this.MinimizeButton.Click += new System.EventHandler(this.Minimize_Clicked);
             // 
-            // EmailSettingsAdress
+            // ExitButton
             // 
-            this.EmailSettingsAdress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.EmailSettingsAdress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.EmailSettingsAdress.Location = new System.Drawing.Point(8, 38);
-            this.EmailSettingsAdress.Name = "EmailSettingsAdress";
-            this.EmailSettingsAdress.Size = new System.Drawing.Size(283, 20);
-            this.EmailSettingsAdress.TabIndex = 11;
-            this.EmailSettingsAdress.TextChanged += new System.EventHandler(this.EmailSettings_ValueChanged);
+            this.ExitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(45)))), ((int)(((byte)(83)))));
+            this.ExitButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ExitButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ExitButton.FlatAppearance.BorderSize = 2;
+            this.ExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.ExitButton.Location = new System.Drawing.Point(700, 0);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(34, 34);
+            this.ExitButton.TabIndex = 1;
+            this.ExitButton.Text = "X";
+            this.ExitButton.UseVisualStyleBackColor = false;
+            this.ExitButton.Click += new System.EventHandler(this.Exit_Clicked);
             // 
-            // EmailSettingsSendBox
+            // label1
             // 
-            this.EmailSettingsSendBox.AutoSize = true;
-            this.EmailSettingsSendBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.EmailSettingsSendBox.Location = new System.Drawing.Point(99, 66);
-            this.EmailSettingsSendBox.Name = "EmailSettingsSendBox";
-            this.EmailSettingsSendBox.Size = new System.Drawing.Size(15, 14);
-            this.EmailSettingsSendBox.TabIndex = 12;
-            this.EmailSettingsSendBox.UseVisualStyleBackColor = true;
-            this.EmailSettingsSendBox.TextChanged += new System.EventHandler(this.EmailSettings_ValueChanged);
-            this.EmailSettingsSendBox.Click += new System.EventHandler(this.EmailSettings_ValueChanged);
-            // 
-            // EmailSettingsBubbleLabel
-            // 
-            this.EmailSettingsBubbleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmailSettingsBubbleLabel.Location = new System.Drawing.Point(131, 57);
-            this.EmailSettingsBubbleLabel.Name = "EmailSettingsBubbleLabel";
-            this.EmailSettingsBubbleLabel.Size = new System.Drawing.Size(131, 30);
-            this.EmailSettingsBubbleLabel.TabIndex = 13;
-            this.EmailSettingsBubbleLabel.Text = "Notification Bubble:";
-            this.EmailSettingsBubbleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // EmailSettingsBubbleBox
-            // 
-            this.EmailSettingsBubbleBox.AutoSize = true;
-            this.EmailSettingsBubbleBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.EmailSettingsBubbleBox.Location = new System.Drawing.Point(268, 66);
-            this.EmailSettingsBubbleBox.Name = "EmailSettingsBubbleBox";
-            this.EmailSettingsBubbleBox.Size = new System.Drawing.Size(15, 14);
-            this.EmailSettingsBubbleBox.TabIndex = 14;
-            this.EmailSettingsBubbleBox.UseVisualStyleBackColor = true;
-            this.EmailSettingsBubbleBox.Click += new System.EventHandler(this.EmailSettings_ValueChanged);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(200, 34);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Simple Job Tracker";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // MainForm
             // 
@@ -553,16 +549,16 @@
             this.CompanyDetails.ResumeLayout(false);
             this.CompanyDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SaveWarningImage)).EndInit();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ProfileList.ResumeLayout(false);
             this.ProfileList.PerformLayout();
             this.TestProfile.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

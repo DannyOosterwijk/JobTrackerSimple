@@ -85,11 +85,17 @@ namespace SimpleJobTracker
                 EmailSettingsAdress.Text = settings.Adress;
                 EmailSettingsBubbleBox.Checked = settings.BubbleChecked;
                 EmailSettingsSendBox.Checked = settings.SendChecked;
+
+                EmailSettingsBubbleBox.Click += new System.EventHandler(EmailSettings_ValueChanged);
+                EmailSettingsSendBox.Click += new System.EventHandler(EmailSettings_ValueChanged);
+                EmailSettingsAdress.TextChanged += new System.EventHandler(EmailSettings_ValueChanged);
             }
             catch
             {
                 Console.WriteLine("WARNING: Email settings save file does not exist");
             }
+
+            SearchAllProfiles(); //make sure this is called only after everything is initialized
         }
 
         //Initialize the icon in the notificiation tray
@@ -179,40 +185,91 @@ namespace SimpleJobTracker
             
         }
 
+        private async Task SearchAllProfiles()
+        {
+            var jobs = profileManager.GetjobProfiles();
+            bool changeFound = false;
+
+            string mailMessage = "";
+            mailMessage += "Job tracker has detected changes in the following websites: \n\n";
+
+            string increasedJobs = "";
+            string decreasedJobs = "";
+
+            for (int i = 0; i < jobs.Count; i++)
+            {
+                bool resultChanged = await searchWeb(jobs[i]);
+                if (resultChanged)
+                {
+                    changeFound = true;
+                    if (jobs[i].History.Count > 1) {
+                        if(jobs[i].History[jobs[i].History.Count - 1].Amount > jobs[i].History[jobs[i].History.Count - 2].Amount)
+                        {
+                            increasedJobs += jobs[i].Name + " - Increased From " + jobs[i].History[jobs[i].History.Count - 2].Amount.ToString() + " To " + jobs[i].History[jobs[i].History.Count - 1].Amount.ToString() + "\n";
+                        }
+                        else
+                        {
+                            decreasedJobs += jobs[i].Name + " - Decreased From " + jobs[i].History[jobs[i].History.Count - 2].Amount + " To " + jobs[i].History[jobs[i].History.Count - 1].Amount + "\n";
+                        }
+                    }
+                    else
+                    {
+                        increasedJobs += jobs[i].Name + " - Increased From 0 To " + jobs[i].History[0].Amount.ToString() + "\n";
+                    }
+                }
+            }
+
+            if (EmailSettingsSendBox.Checked && changeFound)
+            {
+                if (increasedJobs != "") 
+                {
+                    mailMessage += "Jobs that have been increased: \n";
+                    mailMessage += increasedJobs;
+                }
+                if(decreasedJobs != "")
+                {
+                    mailMessage += "Jobs that have been decreased: \n";
+                    mailMessage += decreasedJobs;
+                }
+                
+                await emailer.SendEmailAsync(EmailSettingsAdress.Text, mailMessage);
+            }
+        }
+
         //Try to search the web and retrieve the amount of instances of the profiles tags
-        private async Task<bool> searchWeb(GroupBox company)
+        private async Task<bool> searchWeb(JobProfile profile)
         {
             Stopwatch sw = Stopwatch.StartNew(); //Stopwatch for speed testing
-            company.Controls[2].Text = ""; //Empty search result
+            ProfileList.Controls[profile.Id].Controls[2].Text = ""; //Empty search result
             SearchButton.Enabled = false; //Disable search button
             SearchButton.BackColor = selectedColor;
 
+            bool resultChanged = false;
+
             try
             {
-                JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(company)];
 
                 //Search the web page and count every instance of the tags from the tag string
                 var tagString = profile.Tags;
-                string[] companyTags = tagString.Split(' ');
-                int amount = await javaScraper.CheckWeb(profile.Link, companyTags);
-                company.Controls[2].Text = "Tags Found: " + amount.ToString();
-
-                if (profile.History == null || profile.History[profile.History.Count - 1].Amount != amount)
+                if (tagString != null && tagString.Length > 0)
                 {
-                    profileManager.AddNewResult(profile, amount);
-                    UpdateSettingMenu(profile);
+                    string[] companyTags = tagString.Split(' ');
+                    int amount = await javaScraper.CheckWeb(profile.Link, companyTags);
+                    ProfileList.Controls[profile.Id].Controls[2].Text = "Tags Found: " + amount.ToString();
 
-                    
-
-                }
-                if (EmailSettingsSendBox.Checked)
-                {
-                    await emailer.SendEmailAsync(EmailSettingsAdress.Text, "Job page has changed for " + profile.Name + ", now there are " + amount + " tags");
+                    if (profile.History == null || profile.History[profile.History.Count - 1].Amount != amount)
+                    {
+                        profileManager.AddNewResult(profile, amount);
+                        UpdateSettingMenu(profile);
+                        resultChanged = true;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                company.Controls[2].Text = ex.Message;
+                ProfileList.Controls[profile.Id].Controls[2].Text = ex.Message;
+                sw.Stop();
+                //return false;
             }
             
             //Turn elapsed time into seconds
@@ -225,7 +282,7 @@ namespace SimpleJobTracker
             SearchButton.Enabled = true; //Enable search button
             SearchButton.BackColor = buttonColor;
 
-            return true;
+            return resultChanged;
         }
 
         //Create a groupbox with the profile information and add it to the list
@@ -334,7 +391,8 @@ namespace SimpleJobTracker
         private void Search_Click(object sender, EventArgs e)
         {
             var companyHeader = selectedProfile as GroupBox;
-            searchWeb(companyHeader);
+            JobProfile profile = profileManager.GetjobProfiles()[ProfileList.Controls.GetChildIndex(companyHeader)];
+            searchWeb(profile);
         }
 
         //Exit application
@@ -357,7 +415,12 @@ namespace SimpleJobTracker
         //
         private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
-
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+                notifyIcon.Visible = false;
+            }
         }
 
         //Start grabbing the window
