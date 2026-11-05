@@ -128,7 +128,6 @@ namespace SimpleJobTracker
                 this.WindowState = FormWindowState.Minimized;
                 this.ShowInTaskbar = false;
                 notifyIcon.Visible = true;
-
             }
 
             if (EmailSettingsSearchBox.Checked)

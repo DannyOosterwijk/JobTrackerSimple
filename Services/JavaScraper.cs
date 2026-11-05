@@ -74,7 +74,7 @@ namespace SimpleJobTracker.Services
 
                     //Get path and filename for debug file
                     string fileName = "DebugPage.txt";
-                    string path = Path.Combine(Environment.CurrentDirectory + "/Saves");
+                    string path = Path.Combine(Environment.CurrentDirectory + "/Saves/");
 
                     //create a debug file to more easily read html data
                     //TODO: turn all file writing and reading into a service class
