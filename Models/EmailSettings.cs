@@ -11,5 +11,6 @@ namespace SimpleJobTracker.Models
         public string Adress {  get; set; }
         public bool SendChecked { get; set; }
         public bool BubbleChecked { get; set; }
+        public bool SearchOnStartupChecked { get; set; }
     }
 }

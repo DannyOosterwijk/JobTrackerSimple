@@ -65,6 +65,9 @@
             this.MinimizeButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.EmailSettingsSearchLabel = new System.Windows.Forms.Label();
+            this.EmailSettingsSearchBox = new System.Windows.Forms.CheckBox();
+            this.SearchAllButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.BodyLayout.SuspendLayout();
@@ -304,6 +307,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.SearchAllButton);
+            this.groupBox1.Controls.Add(this.EmailSettingsSearchBox);
+            this.groupBox1.Controls.Add(this.EmailSettingsSearchLabel);
             this.groupBox1.Controls.Add(this.EmailSettingsBubbleBox);
             this.groupBox1.Controls.Add(this.EmailSettingsBubbleLabel);
             this.groupBox1.Controls.Add(this.EmailSettingsSendBox);
@@ -314,7 +320,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.groupBox1.Location = new System.Drawing.Point(3, 302);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 3);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.groupBox1.Size = new System.Drawing.Size(310, 93);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
@@ -323,7 +329,7 @@
             // 
             this.EmailSettingsBubbleBox.AutoSize = true;
             this.EmailSettingsBubbleBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.EmailSettingsBubbleBox.Location = new System.Drawing.Point(268, 66);
+            this.EmailSettingsBubbleBox.Location = new System.Drawing.Point(257, 42);
             this.EmailSettingsBubbleBox.Name = "EmailSettingsBubbleBox";
             this.EmailSettingsBubbleBox.Size = new System.Drawing.Size(15, 14);
             this.EmailSettingsBubbleBox.TabIndex = 14;
@@ -332,7 +338,7 @@
             // EmailSettingsBubbleLabel
             // 
             this.EmailSettingsBubbleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmailSettingsBubbleLabel.Location = new System.Drawing.Point(131, 57);
+            this.EmailSettingsBubbleLabel.Location = new System.Drawing.Point(120, 33);
             this.EmailSettingsBubbleLabel.Name = "EmailSettingsBubbleLabel";
             this.EmailSettingsBubbleLabel.Size = new System.Drawing.Size(131, 30);
             this.EmailSettingsBubbleLabel.TabIndex = 13;
@@ -343,7 +349,7 @@
             // 
             this.EmailSettingsSendBox.AutoSize = true;
             this.EmailSettingsSendBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
-            this.EmailSettingsSendBox.Location = new System.Drawing.Point(99, 66);
+            this.EmailSettingsSendBox.Location = new System.Drawing.Point(85, 42);
             this.EmailSettingsSendBox.Name = "EmailSettingsSendBox";
             this.EmailSettingsSendBox.Size = new System.Drawing.Size(15, 14);
             this.EmailSettingsSendBox.TabIndex = 12;
@@ -353,25 +359,25 @@
             // 
             this.EmailSettingsAdress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
             this.EmailSettingsAdress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.EmailSettingsAdress.Location = new System.Drawing.Point(8, 38);
+            this.EmailSettingsAdress.Location = new System.Drawing.Point(59, 12);
             this.EmailSettingsAdress.Name = "EmailSettingsAdress";
-            this.EmailSettingsAdress.Size = new System.Drawing.Size(283, 20);
+            this.EmailSettingsAdress.Size = new System.Drawing.Size(247, 20);
             this.EmailSettingsAdress.TabIndex = 11;
             // 
             // EmailSettingsLabel
             // 
             this.EmailSettingsLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.EmailSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmailSettingsLabel.Location = new System.Drawing.Point(5, 18);
+            this.EmailSettingsLabel.Location = new System.Drawing.Point(1, 13);
             this.EmailSettingsLabel.Name = "EmailSettingsLabel";
-            this.EmailSettingsLabel.Size = new System.Drawing.Size(300, 20);
+            this.EmailSettingsLabel.Size = new System.Drawing.Size(308, 20);
             this.EmailSettingsLabel.TabIndex = 10;
             this.EmailSettingsLabel.Text = "Email";
             // 
             // EmailSettingsSendLabel
             // 
             this.EmailSettingsSendLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmailSettingsSendLabel.Location = new System.Drawing.Point(8, 57);
+            this.EmailSettingsSendLabel.Location = new System.Drawing.Point(4, 33);
             this.EmailSettingsSendLabel.Name = "EmailSettingsSendLabel";
             this.EmailSettingsSendLabel.Size = new System.Drawing.Size(96, 30);
             this.EmailSettingsSendLabel.TabIndex = 2;
@@ -530,6 +536,39 @@
             this.label1.Text = "Simple Job Tracker";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // EmailSettingsSearchLabel
+            // 
+            this.EmailSettingsSearchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmailSettingsSearchLabel.Location = new System.Drawing.Point(4, 63);
+            this.EmailSettingsSearchLabel.Name = "EmailSettingsSearchLabel";
+            this.EmailSettingsSearchLabel.Size = new System.Drawing.Size(132, 20);
+            this.EmailSettingsSearchLabel.TabIndex = 15;
+            this.EmailSettingsSearchLabel.Text = "Search On Startup:";
+            this.EmailSettingsSearchLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // EmailSettingsSearchBox
+            // 
+            this.EmailSettingsSearchBox.AutoSize = true;
+            this.EmailSettingsSearchBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.EmailSettingsSearchBox.Location = new System.Drawing.Point(133, 69);
+            this.EmailSettingsSearchBox.Name = "EmailSettingsSearchBox";
+            this.EmailSettingsSearchBox.Size = new System.Drawing.Size(15, 14);
+            this.EmailSettingsSearchBox.TabIndex = 16;
+            this.EmailSettingsSearchBox.UseVisualStyleBackColor = true;
+            this.EmailSettingsSearchBox.Click += new System.EventHandler(this.EmailSettings_ValueChanged);
+            // 
+            // SearchAllButton
+            // 
+            this.SearchAllButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(57)))), ((int)(((byte)(83)))));
+            this.SearchAllButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.SearchAllButton.Location = new System.Drawing.Point(159, 60);
+            this.SearchAllButton.Name = "SearchAllButton";
+            this.SearchAllButton.Size = new System.Drawing.Size(147, 25);
+            this.SearchAllButton.TabIndex = 18;
+            this.SearchAllButton.Text = "Search All";
+            this.SearchAllButton.UseVisualStyleBackColor = false;
+            this.SearchAllButton.Click += new System.EventHandler(this.SearchAll_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -601,6 +640,9 @@
         private System.Windows.Forms.TextBox EmailSettingsAdress;
         private System.Windows.Forms.CheckBox EmailSettingsBubbleBox;
         private System.Windows.Forms.Label EmailSettingsBubbleLabel;
+        private System.Windows.Forms.Label EmailSettingsSearchLabel;
+        private System.Windows.Forms.CheckBox EmailSettingsSearchBox;
+        private System.Windows.Forms.Button SearchAllButton;
     }
 }
 

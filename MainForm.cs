@@ -1,4 +1,6 @@
-﻿using SimpleJobTracker.Models;
+﻿using IWshRuntimeLibrary;
+using Microsoft.Win32;
+using SimpleJobTracker.Models;
 using SimpleJobTracker.Services;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SimpleJobTracker
 {
@@ -75,6 +78,21 @@ namespace SimpleJobTracker
             UpdateScrollSettings();
             this.MouseWheel += ProfileListScroll;
 
+            //Create a shortcut in the startups folder so application starts on pc startup
+            string userName = Environment.UserName;
+            string shortcutName = "SimpleJobTracker.lnk";
+            string startupPath = $"C:/Users/{userName}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/";
+
+            if (!System.IO.File.Exists(Path.Combine(startupPath, shortcutName))){
+                WshShell shell = new WshShell();
+                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(Path.Combine(startupPath, shortcutName));
+
+                shortcut.TargetPath = Application.ExecutablePath;
+                shortcut.IconLocation = Path.Combine(Environment.CurrentDirectory, "IconJTS.ico");
+                shortcut.WorkingDirectory = Environment.CurrentDirectory;
+                shortcut.Save();
+            }
+
             //TODO:turn into function
             try
             {
@@ -94,6 +112,7 @@ namespace SimpleJobTracker
                 EmailSettingsAdress.Text = settings.Adress;
                 EmailSettingsBubbleBox.Checked = settings.BubbleChecked;
                 EmailSettingsSendBox.Checked = settings.SendChecked;
+                EmailSettingsSearchBox.Checked = settings.SearchOnStartupChecked;
             }
             catch
             {
@@ -112,7 +131,10 @@ namespace SimpleJobTracker
 
             }
 
-            SearchAllProfiles(); //make sure this is called only after everything is initialized
+            if (EmailSettingsSearchBox.Checked)
+            {
+                SearchAllProfiles(); //make sure this is called only after everything is initialized
+            }
         }
 
         //Initialize the icon in the notificiation tray
@@ -269,8 +291,12 @@ namespace SimpleJobTracker
 
             Stopwatch sw = Stopwatch.StartNew(); //Stopwatch for speed testing
             ProfileList.Controls[profile.Id].Controls[2].Text = ""; //Empty search result
-            SearchButton.Enabled = false; //Disable search button
+            
+            //Disable both search buttons
+            SearchButton.Enabled = false;
             SearchButton.BackColor = selectedColor;
+            SearchAllButton.Enabled = false;
+            SearchAllButton.BackColor = selectedColor;
 
             bool resultChanged = false;
 
@@ -305,8 +331,11 @@ namespace SimpleJobTracker
             float timeInSeconds = roundedTime / 100f;
             Console.WriteLine("Succesfully gotten job page info, time elapsed: " + timeInSeconds);
 
-            SearchButton.Enabled = true; //Enable search button
+            //Enable search buttons
+            SearchButton.Enabled = true;
             SearchButton.BackColor = buttonColor;
+            SearchAllButton.Enabled = true;
+            SearchAllButton.BackColor = buttonColor;
 
             Console.WriteLine("Succesfully searched page");
             return resultChanged;
@@ -559,7 +588,7 @@ namespace SimpleJobTracker
                     Directory.CreateDirectory(Environment.CurrentDirectory + "/Saves");
                 }
 
-                var settings = new EmailSettings() { Adress = EmailSettingsAdress.Text, BubbleChecked = EmailSettingsBubbleBox.Checked, SendChecked = EmailSettingsSendBox.Checked };
+                var settings = new EmailSettings() { Adress = EmailSettingsAdress.Text, BubbleChecked = EmailSettingsBubbleBox.Checked, SendChecked = EmailSettingsSendBox.Checked, SearchOnStartupChecked = EmailSettingsSearchBox.Checked };
                 var serializedObject = Newtonsoft.Json.JsonConvert.SerializeObject(settings, Newtonsoft.Json.Formatting.Indented);//serialize profiles
 
                 using (StreamWriter sw = new StreamWriter(path))
@@ -574,6 +603,11 @@ namespace SimpleJobTracker
                 Console.WriteLine("ERROR: Could not write to email settings save file");
             }
             
+        }
+
+        private void SearchAll_Click(object sender, EventArgs e)
+        {
+            SearchAllProfiles();
         }
     }
 }
